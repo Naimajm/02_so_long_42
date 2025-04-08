@@ -1,0 +1,41 @@
+Prompts Específicos (en español):
+
+1. Protagonista (Personaje Principal):
+
+"Peón estilo RimWorld, vista desde arriba, protagonista, llevando una túnica táctica 'neo-nazarí' (tela ocre con líneas de circuito azul brillante), con capucha y visor integrado (ligero brillo azul), portando una pistola láser con grabados metálicos ornamentados, un brazo cibernético ligeramente visible (cromo con sutiles patrones geométricos), 64x64 píxeles, PNG"
+
+"Arte vectorial simple de un personaje de RimWorld, vista desde arriba, agente 'Alhambra Neo-Nazarí', llevando un chaleco blindado con patrones geométricos y detalles en verde neón, cabeza cubierta con un turbante tecnológicamente mejorado con enlace neural visible, sosteniendo un vibro-cuchillo inspirado en una jineta (hoja roja brillante), 64x64 píxeles, PNG"
+
+"Sprite de RimWorld, peón protagonista, llevando una túnica larga y fluida de tela rojo oscuro con sutiles mejoras cibernéticas, ojos magenta brillantes, portando una tableta de datos con bordes de oro ornamentados, perspectiva desde arriba, 64x64 píxeles, PNG"
+
+2. Enemigo (Antagonista/Miembro de Facción Hostil):
+
+"Peón estilo RimWorld, vista desde arriba, miembro de facción enemiga, llevando una armadura de cromo oscuro con ángulos pronunciados y detalles en rojo brillante, casco con un visor amenazante, empuñando un rifle de plasma con una carcasa con patrones geométricos, 64x64 píxeles, PNG"
+
+"Sprite simple desde arriba de un enemigo de RimWorld, ejecutor 'Alhambra Neo-Nazarí', llevando un traje blindado pesado (polímero negro con incrustaciones geométricas de bronce), brazo cibernético con arma integrada, óptica naranja brillante, 64x64 píxeles, PNG"
+
+"Sprite de peón de RimWorld, hostil, llevando túnicas raídas con cibernética expuesta (cables y metal), un ojo azul brillante, empuñando un arma de energía cruda con decoraciones improvisadas, vista desde arriba, 64x64 píxeles, PNG"
+
+3. Objetos:
+
+Azulejo Cibernético: "Baldosa de suelo estilo RimWorld, 64x64, azulejo cibernético 'neo-nazarí', patrón geométrico clásico con líneas de neón azul brillante entre las teselas, algunas grietas revelando circuitos subyacentes, PNG"
+
+Arco de Neón: "Segmento de pared estilo RimWorld, 64x64, arco de herradura 'inspirado en la Alhambra' delineado con tubos de neón magenta brillante, representación vectorial simple, PNG"
+
+Columna de Datos: "Objeto estilo RimWorld, 64x64, columna de datos 'neo-nazarí', hecha de metal pulido oscuro con bandas verticales de luz cian brillante, vista desde arriba, PNG"
+
+Fuente Holográfica: "Objeto estilo RimWorld, 64x64, base de fuente 'Alhambra' con una proyección holográfica azul dinámica de patrones geométricos, vista desde arriba, PNG"
+
+Terminal de Datos Ornamentado: "Objeto estilo RimWorld, 64x64, terminal de datos 'cyberpunk Alhambra' integrado en un nicho con forma de arco, metal con patrones geométricos grabados y una pantalla brillante, vista desde arriba, PNG"
+
+Túnica Táctica (objeto de equipo): "Icono de vestimenta estilo RimWorld, 64x64, túnica táctica 'neo-nazarí', tela ocre con detalles de circuito azul brillante, representación simple, PNG"
+
+Pistola Láser: "Icono de arma estilo RimWorld, 64x64, pistola láser con una carcasa decorada con grabados metálicos ornamentados y un emisor brillante, PNG"
+
+4. Mapas (Aunque generar un mapa completo directamente en 64x64 es difícil, puedes pedir elementos individuales que luego ensamblarías):
+
+"Baldosa de mapa estilo RimWorld, 64x64, patio 'neo-nazarí', suelo de mármol pulido con reflejos de neón, una sección de una pared con líneas de circuito brillantes, vista desde arriba, PNG"
+
+"Arte vectorial simple, elemento de mapa de RimWorld, 64x64, jardín 'inspirado en la Alhambra' con plantas bioluminiscentes (brillo verde) y una sección de una fuente de flujo de datos, vista desde arriba, PNG"
+
+"Terreno estilo RimWorld, 64x64, interior 'cyberpunk Alhambra', sección de pared de estuco con yesería holográfica (parpadeo sutil) y un suelo con rejillas de ventilación iluminadas, vista desde arriba, PNG"

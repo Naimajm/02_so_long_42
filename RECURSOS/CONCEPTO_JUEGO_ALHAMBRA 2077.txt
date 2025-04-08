@@ -1,0 +1,79 @@
+Concepto General Alhambra Neo-Nazarí
+
+La idea es imaginar que una corporación o una facción tecnológicamente avanzada ha tomado la Alhambra (o una réplica inspiración) como base o centro de poder. La arquitectura original se mantiene reconocible, pero está mejorada o intervenida con tecnología cyberpunk. El estilo de RimWorld obliga a simplificar formas y texturas, enfocándose en la legibilidad desde una vista cenital.
+
+I. Tileset (Conjunto de Baldosas Entorno)
+
+Suelos
+
+Azulejos Cibernéticos Patrones geométricos clásicos nazaríes, pero las líneas entre las teselas brillan con luz de neón (azul eléctrico, magenta, verde ácido). Algunos podrían estar agrietados, revelando circuitos o cables luminosos debajo.
+
+Mármol Pulido con Reflejos de Neón Suelos lisos y reflectantes (como los de mármol de Macael) que reflejan las luces de neón del entorno. Textura simple en RimWorld, pero con un brillo especular distintivo.
+
+Rejillas de Ventilación Iluminadas Típicas rejillas metálicas de suelo cyberpunk, pero quizás con patrones geométricos sutiles. Por debajo se ve una luz tenue o el brillo de maquinaria.
+
+Agua de Estanque de Datos Los estanques y fuentes tendrían agua con un ligero brillo o con líneas de códigodatos fluyendo sutilmente por debajo (efecto visual simple). Podrían tener peces koi holográficos.
+
+Jardines Hidropónicos Bioluminiscentes Zonas de tierra o grava con plantas modificadas genéticamente que brillan suavemente o tienen patrones luminosos. Podrían ser las bahías hidropónicas de RimWorld con un toque estético.
+
+Muros y Estructuras
+
+Muros de Estuco con Circuitos Paredes con la textura básica del estuco blanco o rojizo de la Alhambra, pero con finas líneas de circuitos luminosos incrustadas o paneles de acceso tecnológico integrados discretamente.
+
+Arcos de Herradura de Neón Los icónicos arcos de herradura y polilobulados, pero perfilados con tubos de neón o hechos de metal cromado oscuro con iluminación integrada.
+
+Columnas de Datos Las esbeltas columnas nazaríes, pero hechas de metal pulido o materiales compuestos oscuros, con bandas luminosas verticales o anillos de datos. Los capiteles podrían ser emisores holográficos o tener sensores.
+
+Celosías Láser En lugar de celosías de madera o estuco, usar barreras de láser de baja intensidad con patrones geométricos, o paneles de cristal inteligente que muestran motivos decorativos digitales.
+
+Yeserías Holográficas Zonas de pared donde los intrincados relieves de yeso son simulados por proyecciones holográficas sutiles y parpadeantes.
+
+Objetos y Mobiliario
+
+Fuentes Holográficas La base de una fuente clásica, pero en lugar de agua, proyecta un holograma dinámico (quizás patrones geométricos abstractos, logos corporativos o incluso datos ambientales). Podría funcionar como fuente de energía o terminal.
+
+Terminales de Datos Ornamentados Consolas de ordenador, terminales de hackeo o paneles de control integrados en nichos de pared con forma de arco o decorados con patrones geométricos grabados en el metal.
+
+Bancos de Jardín Flotantes Bancos con diseño inspirado en los originales, pero levitando ligeramente sobre el suelo con un brillo inferior.
+
+Servidores Ocultos Racks de servidores integrados en paredes o disimulados como elementos arquitectónicos, con luces parpadeantes y ventiladores visibles.
+
+Letreros de Neón Caligráficos Señalización usando neones con caligrafía árabe estilizada o patrones geométricos.
+
+II. Spritesheet (Hojas de Sprites de Personajes Peones)
+
+Forma Base Mantener la clásica forma de peón de RimWorld cuerpo redondeado rectangular simple visto desde arriba, cabeza distintiva.
+
+Ropa y Armaduras
+
+Túnicas Tácticas Ropajes inspirados en chilabas o túnicas, pero hechos de tejidos balísticos o inteligentes, con líneas luminosas, hombreras tecnológicas o capuchas con visores integrados. Colores podrían ser tonos tierra (ocre, rojo Alhambra) combinados con negro, gris y acentos de neón.
+
+Armaduras Neo-Nazarí Blindaje corporal con placas que imitan sutilmente patrones geométricos o formas de armaduras históricas, pero hechas de cromo, polímeros oscuros y con luces de estado.
+
+Ropa de Civil Trabajador Versiones más sencillas, quizás chalecos con herramientas tecnológicas sobre ropa básica, o trajes de trabajo con logos corporativos holográficos. Turbantes o coberturas de cabeza podrían tener implantes neurales visibles o visores de datos.
+
+Cyberware (Implantes)
+
+Brazos Piernas Cromadas Extremidades cibernéticas claramente visibles, quizás con grabados geométricos sutiles.
+
+Ojos Luminosos Visores Ojos que brillan con colores de neón, o visores ópticos integrados en la cara o cabeza.
+
+Implantes Neurales Puertos de conexión visibles en la nuca o sienes.
+
+Armas
+
+Armas de Energía con Decoración Pistolas láser, rifles de plasma, etc., con carcasas que tienen grabados láser de patrones geométricos o incrustaciones luminosas.
+
+Espadas VibroTérmicas Armas cuerpo a cuerpo inspiradas en espadas árabes (como la jineta), pero con hojas energéticas, vibratorias o térmicas. Empuñaduras podrían ser de metal ornamentado con componentes tecnológicos.
+
+Granadas Holográficas PEM Equipamiento táctico con carcasas que siguen la estética.
+
+Direccionalidad Sprites simples para indicar la dirección (frente, espalda, lados) como en RimWorld, quizás con el brillo de los ojos visores o detalles en la ropa armadura para ayudar a la orientación.
+
+Consideraciones de Estilo RimWorld
+
+Claridad A pesar de la fusión, cada tile y sprite debe ser fácilmente identificable. La función (muro, suelo, cama, personaje hostil) debe primar.
+
+Grid Todo debe encajar perfectamente en la cuadrícula de RimWorld.
+
+Paleta de Colores Una mezcla interesante los tonos cálidos y terrosos de la Alhambra (ocres, rojos, blancos rotos) contrastando fuertemente con los neones vibrantes (azul, rosa, verde, amarillo) y los metales oscuros cromados del cyberpunk.
