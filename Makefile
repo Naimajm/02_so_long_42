@@ -31,12 +31,8 @@ INCLUDES_DIR 	:= ./include
 
 LIBFT_DIR 		:= ./libft
 LIBFT_ARCHIVE 	:= libft.a
-
 FT_PRINTF_DIR 		:= ./ft_printf
 FT_PRINTF_ARCHIVE 	:= libftprintf.a
-
-GET_NEXT_LINE_DIR 		:= ./get_next_line
-GET_NEXT_LINE_ARCHIVE 	:= get_next_line.a
 
 # LIBRERIA MLX42
 MLX42_DIR 		:= ./MLX42
@@ -53,15 +49,15 @@ CFLAGS 			= -Wall -Wextra -Werror
 MAKE_LIBRARY 	= ar -rcs 	# COMPRESION A 1 ARCHIVO -> LIBRERIAS .a  -> $(MAKE_LIBRARY) $(NAME) $(OBJ_FILES) 
 
 # FLAGS MLX42
-IFLAGS	= -I$(MLX42_DIR)/include -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(GET_NEXT_LINE_DIR) -I$(INCLUDES_DIR)
-LFLAGS	= -L$(MLX42_DIR)/build -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf -L$(GET_NEXT_LINE_DIR)
+IFLAGS	= -I$(MLX42_DIR)/include -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(INCLUDES_DIR)
+LFLAGS	= -L$(MLX42_DIR)/lib -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
 
 # RECURSOS -----------------------------------------
 # ---------------------------------------------------
 # LISTADO FUNCIONES A INCLUIR EN BIBLIOTECA
 
-SRC_FILES 	= so_long.c
-#SRC_FILES 	= $(wildcard src/*.c)
+#SRC_FILES 	= so_long.c
+SRC_FILES 	= $(wildcard *.c)
 
 #SRC_FILES 	= $(notdir $(wildcard $(SRC_DIR)/*.c)) # autocargar todos los archivos .c
 #OBJ_FILES 	= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
@@ -95,9 +91,9 @@ $(LIBRARY) : $(OBJ_FILES)
 	@echo "$(DARK_GREEN)$(LIBRARY) library created ✓$(DEF_COLOR)"
 
 # EJECUTABLE FINAL
-$(NAME): $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE) $(GET_NEXT_LINE_ARCHIVE) $(MLX42_ARCHIVE) $(LIBRARY)
+$(NAME): $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE) $(MLX42_ARCHIVE) $(LIBRARY)
 	@echo "$(ORANGE)🚀​ Compiling $(NAME)... $(DEF_COLOR)"
-	@$(CC) ${CFLAGS} $(IFLAGS) -o $(NAME) $(LIBRARY) $(FT_PRINTF_DIR)/$(FT_PRINTF_ARCHIVE) $(LIBFT_DIR)/$(LIBFT_ARCHIVE) $(GET_NEXT_LINE_DIR)/$(GET_NEXT_LINE_ARCHIVE) $(MLX42_DIR)/build/$(MLX42_ARCHIVE) $(LFLAGS)
+	@$(CC) ${CFLAGS} $(IFLAGS) -o $(NAME) $(LIBRARY) $(FT_PRINTF_DIR)/$(FT_PRINTF_ARCHIVE) $(LIBFT_DIR)/$(LIBFT_ARCHIVE) $(MLX42_DIR)/lib/$(MLX42_ARCHIVE) $(LFLAGS)
 	@echo "$(DARK_GREEN)$(NAME) has been created ✓$(DEF_COLOR)"
 
 #COMPILACION MANUAL SI NO FUNCIONA MAKEFILE -> cc -Wall -Wextra -Werror -I./include -I./libft -I./ft_printf \
@@ -119,16 +115,11 @@ $(FT_PRINTF_ARCHIVE):
 	@cd ${FT_PRINTF_DIR} && make
 	@echo "$(DARK_GREEN)$(FT_PRINTF_ARCHIVE) library created ✓$(DEF_COLOR)"
 
-$(GET_NEXT_LINE_ARCHIVE):
-	@echo "$(ORANGE)📌​ Compiling $(GET_NEXT_LINE_ARCHIVE) library... $(DEF_COLOR)"
-	@cd ${GET_NEXT_LINE_DIR} && make
-	@echo "$(DARK_GREEN)$(GET_NEXT_LINE_ARCHIVE) library created ✓$(DEF_COLOR)"
-
 # LIBRERIA MLX42
-$(MLX42_ARCHIVE):
-	@echo "$(ORANGE)📌 Compiling $(MLX42_ARCHIVE)...$(DEF_COLOR)"
-	@cd $(MLX42_DIR)/build && make
-	@echo "$(DARK_GREEN)$(MLX42_ARCHIVE) library created ✓$(DEF_COLOR)"
+#$(MLX42_ARCHIVE):
+#@echo "$(ORANGE)📌 Compiling $(MLX42_ARCHIVE)...$(DEF_COLOR)"
+#@cd $(MLX42_DIR)/build && make
+#@echo "$(DARK_GREEN)$(MLX42_ARCHIVE) library created ✓$(DEF_COLOR)"
 
 ## BONUS ---------------------------------------------------------
 #@rm -rf $(OBJ_DIR)
@@ -137,20 +128,18 @@ $(MLX42_ARCHIVE):
 clean:
 	@echo "${ORANGE}🗑️​ Removing object files...${NAME}...${DEF_COLOR}"	
 	@rm -f $(OBJ_FILES)	
-	@echo "${ORANGE}🗑️​ Removing object files...${LIBFT_ARCHIVE}, ${FT_PRINTF_ARCHIVE}, ${GET_NEXT_LINE_ARCHIVE}...${DEF_COLOR}"
+	@echo "${ORANGE}🗑️​ Removing object files...${LIBFT_ARCHIVE}, ${FT_PRINTF_ARCHIVE}..${DEF_COLOR}"
 	@cd $(LIBFT_DIR) && $(MAKE) clean
 	@cd $(FT_PRINTF_DIR) && $(MAKE) clean
-	@cd $(GET_NEXT_LINE_DIR) && $(MAKE) clean
 	@echo "${DARK_GREEN}Cleaning objects ${NAME}...is done! ${DEF_COLOR}"
 
 fclean: clean
 	@echo "${ORANGE}🗑️ Removing files...${NAME} and $(LIBRARY)... ${DEF_COLOR}"
 	@rm -f $(NAME)
 	@rm -f $(LIBRARY)
-	@echo "${ORANGE}🗑️ Removing files...${LIBFT_ARCHIVE}, ${FT_PRINTF_ARCHIVE}, ${GET_NEXT_LINE_ARCHIVE}... ${DEF_COLOR}"
+	@echo "${ORANGE}🗑️ Removing files...${LIBFT_ARCHIVE}, ${FT_PRINTF_ARCHIVE}.. ${DEF_COLOR}"
 	@cd $(LIBFT_DIR) && $(MAKE) fclean
 	@cd $(FT_PRINTF_DIR) && $(MAKE) fclean
-	@cd $(GET_NEXT_LINE_DIR) && $(MAKE) fclean
 	@echo "${DARK_GREEN}Cleaning ${NAME} is done! ${DEF_COLOR}"
 
 ## DEBUG

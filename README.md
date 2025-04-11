@@ -6,3 +6,6 @@
 
 # doc minilñibx
 ### https://harm-smits.github.io/42docs/libs/minilibx/getting_started.html
+
+# generador mapa
+### https://benbohle.github.io/solong_map_maker_42/
