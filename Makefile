@@ -56,13 +56,10 @@ LFLAGS	= -L$(MLX42_DIR)/lib -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT_DIR) -lf
 # ---------------------------------------------------
 # LISTADO FUNCIONES A INCLUIR EN BIBLIOTECA
 
-#SRC_FILES 	= so_long.c
 SRC_FILES 	= $(wildcard *.c)
 
-#SRC_FILES 	= $(notdir $(wildcard $(SRC_DIR)/*.c)) # autocargar todos los archivos .c
-#OBJ_FILES 	= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
-
 OBJ_FILES := $(SRC_FILES:%.c=%.o) 
+#OBJ_FILES 	= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 # Asegurá que la carpeta obj/ existe antes de compilar los .o.
 #$(OBJ_FILES): | $(OBJ_DIR)
@@ -91,7 +88,7 @@ $(LIBRARY) : $(OBJ_FILES)
 	@echo "$(DARK_GREEN)$(LIBRARY) library created ✓$(DEF_COLOR)"
 
 # EJECUTABLE FINAL
-$(NAME): $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE) $(MLX42_ARCHIVE) $(LIBRARY)
+$(NAME): $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE) $(LIBRARY)
 	@echo "$(ORANGE)🚀​ Compiling $(NAME)... $(DEF_COLOR)"
 	@$(CC) ${CFLAGS} $(IFLAGS) -o $(NAME) $(LIBRARY) $(FT_PRINTF_DIR)/$(FT_PRINTF_ARCHIVE) $(LIBFT_DIR)/$(LIBFT_ARCHIVE) $(MLX42_DIR)/lib/$(MLX42_ARCHIVE) $(LFLAGS)
 	@echo "$(DARK_GREEN)$(NAME) has been created ✓$(DEF_COLOR)"
@@ -152,5 +149,6 @@ debug: re
 # FUNCION RECONSTRUCCION -> ELIMINACION ARCHIVOS '.o' + NUEVA COMPILACION CON RECETA $(NAME)
 re: fclean all
 	@echo "${DARK_GREEN}🔁 Cleaning $(NAME) is done and $(NAME) has been recompiled✓! ${DEF_COLOR}"	
+	@make clean
 
 .PHONY: all clean fclean re debug #bonus

@@ -6,58 +6,13 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 21:17:25 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/11 14:31:01 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/13 17:51:00 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/so_long.h" // ft_printf
 
-t_game	*ft_initialize_struct_game(t_game *game);
 
-// GENERATE MAP
-t_map	*load_map(char *filename)
-{
-	int	file_descriptor;
-
-	//char	*str_map;	// string input
-	//char	**data_map; // lista lineas mapas
-	t_map	*map;
-
-	// abrir archivo
-	file_descriptor = open(filename, O_RDONLY);
-	// validation
-	if (file_descriptor == -1)
-	{
-		ft_printf(ERROR_OPEN_FILE);
-		return (NULL);
-	}
-	map = NULL;
-
-
-	return (map);
-}
-
-// INICIALIZAR VALORES STRUCTURA GAME 
-t_game	*ft_initialize_struct_game(t_game *game)
-{
-	game->mlx = NULL;			
-	game->map = NULL;		
-
-	game->img_ground = NULL;
-	game->img_wall = NULL;	
-	game->img_player = NULL;	
-	game->img_player_up = NULL;	
-	game->img_player_down = NULL;	
-	game->img_player_left = NULL;	
-	game->img_player_right = NULL;	
-	game->img_collect = NULL;
-	game->img_exit = NULL;
-
-	game->move_count = 0;
-	game->wmoves = NULL;
-	game->frame_count = 0;
-	return (game);
-}
 
 // MAIN ---------------------------------------------------------
 // -----------------------------------------------------------
@@ -65,21 +20,45 @@ t_game	*ft_initialize_struct_game(t_game *game)
 int	main(int argc, char **argv)
 {
 	t_map	*map;
-	//t_game	*game;
+	t_game	*game;
 
-	// ARGS VALIDATION
+	//ft_printf("nombre mapa -> %s\n", argv[1]);
+
+	// ARGS VALIDATION ------------------------
 	if (argc < 2)
-		return (ft_printf(ERROR_ARGS_1));
+		return (ft_printf(ERROR_ARGS_1), FAILURE);
 	else if (argc > 2)
-		return (ft_printf(ERROR_ARGS_2));
-	
-	// inicializacion map 
+		return (ft_printf(ERROR_ARGS_2), FAILURE);		
+
+	// CARGA STRUCT MAPA -------------------------
+	// ---------------------------------------------
 	map = (t_map *) malloc(sizeof(t_map));
 	if (!map)
 		return (FAILURE);
-	//map = load_map(argv[1]);
-	map = NULL;	
-	ft_printf("%s", argv[1]);
+
+	map = load_map(argv[1]);
+	// CHECK MAPA (CONDICIONES SUBJECT)  ---------
+    /* if (!map || !check_map(map))
+		return (ft_free_exit(data_map, map), NULL); */
+	ft_struct_map_print(map);  // debug impresion valores mapa
+	
+	// CARGA STRUCT GAME -------------------------
+	// ---------------------------------------------
+	// reserva + validacion
+	game = (t_game *) malloc(sizeof(t_game));
+	/* if (!game)
+		return (cleanup(game), EXIT_FAILURE); */
+
+	load_game(game, map);		// inicializar struct game + cargar game
+    ft_struct_game_print(game); // debug
+	
+	// CARGAR LOOP JUEGO -------------------------
+	// ---------------------------------------------
+	
+	mlx_loop(game->mlx);
+
+	// SALIDA JUEGO -----------------------------
+	
 
 	return (SUCCESS);
 }
