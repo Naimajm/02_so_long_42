@@ -44,7 +44,7 @@ OBJ_DIR 	:= ./obj
 # FLAGS -----------------------------------------
 # ---------------------------------------------------
 
-CC 				= gcc
+CC 				= cc
 CFLAGS 			= -Wall -Wextra -Werror
 MAKE_LIBRARY 	= ar -rcs 	# COMPRESION A 1 ARCHIVO -> LIBRERIAS .a  -> $(MAKE_LIBRARY) $(NAME) $(OBJ_FILES) 
 
@@ -56,7 +56,8 @@ LFLAGS	= -L$(MLX42_DIR)/lib -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT_DIR) -lf
 # ---------------------------------------------------
 # LISTADO FUNCIONES A INCLUIR EN BIBLIOTECA
 
-SRC_FILES 	= $(wildcard *.c)
+# TODO : QUITAR WILDCARD Y LISTAR ARCHIVOS
+SRC_FILES := $(wildcard *.c)
 
 OBJ_FILES := $(SRC_FILES:%.c=%.o) 
 #OBJ_FILES 	= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
@@ -151,4 +152,4 @@ re: fclean all
 	@echo "${DARK_GREEN}🔁 Cleaning $(NAME) is done and $(NAME) has been recompiled✓! ${DEF_COLOR}"	
 	@make clean
 
-.PHONY: all clean fclean re debug #bonus
+.PHONY: all clean fclean re debug
