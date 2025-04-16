@@ -1,17 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   05_utils.c                                         :+:      :+:    :+:   */
+/*   07_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 21:20:02 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/15 21:52:16 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/16 10:48:25 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/so_long.h"
-
 
 void    ft_struct_map_print(t_map *map);
 void	ft_strings_array_print(char **array);
@@ -20,6 +19,8 @@ void	ft_matrix_bools_print(t_map *map);
 // DEBUG -> IMPRIMIR ESTRUCTURA GAME
 void    ft_struct_game_print(t_game *game)
 {
+	if (!game)
+		return ;
 	// impresion variables estructura map
 	ft_printf("STRUCT GAME----------------: \n");
 	ft_printf("mlx: %i\n", game->mlx);
@@ -54,7 +55,7 @@ void    ft_struct_map_print(t_map *map)
 
 	ft_printf("player_position (x, y): (%i, %i)\n", map->player_position.x, map->player_position.y);
 	ft_printf("exit_position (x, y): (%i, %i)\n", map->exit_position.x, map->exit_position.y);
-	ft_printf("\n");
+	ft_printf("-------\n");
 }
 
 // DEBUG -> IMPRIMIR LISTA STRINGS -> char **

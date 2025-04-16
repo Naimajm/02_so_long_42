@@ -6,12 +6,14 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 00:00:37 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/16 01:28:53 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/16 11:07:52 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/so_long.h"
 
+int check_rectangular_map(t_map *map);
+int	check_closed_map(t_map *map);
 int	components_map_counter(t_map *map, char component);
 
 // CHECK COMPONENTES -----------------------
@@ -45,9 +47,7 @@ int check_rectangular_map(t_map *map)
 {
 	int row;
 
-	row = 0;
-	if (map->width == map->height)
-		return (FAILURE);
+	row = 0;	
 	// factor forma -> len filas iguales
 	while (row < map->height)
 	{
@@ -79,9 +79,9 @@ int	check_closed_map(t_map *map)
 			// resto filas -> 1 elem + ultimo (x = 0 + x = width) == Wall
 			if (map->data[row][0] != WALL || map->data[row][map->width - 1] != WALL)
 				return (FAILURE);
-			row++;
+			column++;
 		}		
-		column++;
+		row++;
 	}		
 	return (SUCCESS);
 }

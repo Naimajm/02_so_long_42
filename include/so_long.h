@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:30:57 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/16 01:24:36 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/16 13:17:41 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,13 @@
 
 // ERRORS MESSAGES 
 
-#define ERROR_ARGS_1	"Error\n Enter a map file\n"
-#define ERROR_ARGS_2	"Error\n Too many arguments\n"
+#define ERROR_ARGS_1		"Error\n Enter a map file\n"
+#define ERROR_ARGS_2		"Error\n Too many arguments\n"
+#define ERROR_TYPE_FILENAME	"Error\n Invalid extension file\n"
 
 #define ERROR_ALLOCATING_MEM_MAP	"Error\n Allocating map memory\n"
 #define ERROR_ALLOCATING_MEM_GAME	"Error\n Allocating game memory\n"
+
 
 #define ERROR_OPEN_FILE	"Error\n opening file\n"
 
@@ -104,6 +106,7 @@ typedef struct s_game
 
 // so_long.c ----------------- MAIN ---------------------
 
+int	check_filename_type(char *filename);
 int	check_map(t_map *map);
 void	game_over(t_game *game);
 
@@ -160,7 +163,7 @@ void    initialize_map_positions(t_map *map);
 // 05_free_functions.c  -> liberacion memoria, leaks y cierre ------------------------------
 
 void	cleanup_game(t_game *game);
-void	free_textures(t_game *game);
+void	free_images(t_game *game);
 void	clean_map(t_map *map);
 void	free_matrix(void **matrix, int height);
 
