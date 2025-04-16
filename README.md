@@ -1,5 +1,7 @@
 # 02_so_long_42
 
+### https://reactive.so/post/42-a-comprehensive-guide-to-so_long/
+
 ## doc repositorio MLX42
 ### https://github.com/codam-coding-college/MLX42/blob/master/docs/Basics.md
 ### https://github.com/codam-coding-college/MLX42/wiki

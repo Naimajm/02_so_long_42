@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:30:57 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/16 13:17:41 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/16 20:36:23 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 /* OWN LIBRARIES */
 #include "../libft/libft.h"
 #include "../ft_printf/ft_printf.h"  // ft_printf
-
 #include "../MLX42/include/MLX42/MLX42.h"   // file .h MLX42
 
 /* GLOBAL VARIABLES ----------------------------------------- */ 
@@ -38,7 +37,6 @@
 #define	WINDOW_TITLE  	"alhambra 2077"
 
 // ERRORS MESSAGES 
-
 #define ERROR_ARGS_1		"Error\n Enter a map file\n"
 #define ERROR_ARGS_2		"Error\n Too many arguments\n"
 #define ERROR_TYPE_FILENAME	"Error\n Invalid extension file\n"
@@ -50,12 +48,12 @@
 #define ERROR_OPEN_FILE	"Error\n opening file\n"
 
 #define ERROR_CHECK_MAP				"Error\n Check conditions map\n"
+#define ERROR_CHECK_NOT_ACCESS_MAP	"Error\n components not accessible\n"
 #define ERROR_CHECK_COMPONENTS_MAP	"Error\n Invalid components\n"
 #define ERROR_CHECK_RECTANGULAR_MAP	"Error\n non-rectangular map\n"
 #define ERROR_CHECK_CLOSED_MAP		"Error\n unclosed map\n"
 
 // MAP ELEMENTS
-
 #define	GROUND				'0'
 #define	WALL				'1'
 #define INITIAL_POSITION	'P'
@@ -104,40 +102,27 @@ typedef struct s_game
 	bool		exit_success;	
 }	t_game;
 
-// so_long.c ----------------- MAIN ---------------------
+// 00_so_long.c ----------------- MAIN ---------------------
 
-int	check_filename_type(char *filename);
+
+
+
+// 01_check_map.c -------------------------------------
+
 int	check_map(t_map *map);
-void	game_over(t_game *game);
-
-// 02_check_map.c -------------------------------------
-
+int	check_accessible_components_map(t_map *map);
 int	check_components_map(t_map *map);
 int check_rectangular_map(t_map *map);
 int	check_closed_map(t_map *map);
+
+// 02_utils_map.c -------------------------------------
+
+int	check_filename_type(char *filename);
+void	flood_fill(t_map *map, char **map_data, int y, int x);
+t_map	*copy_struct_map(t_map *map);
 int	components_map_counter(t_map *map, char component);
 
-// 04_render.c -------------------------------------
-
-void    render_map(t_game *game);
-void    render_tile(t_game *game, int position_y, int position_x);
-
-// 03_ft_hooks.c   -> GESTION INICIALIZACION + CARGA LOOP JUEGO ---------------------------
-
-void    start_game(t_game *game);
-void    ft_loop_hook(void *param);
-void    close_window_handler(t_game *game);
-void    key_handler(t_game *game);
-//static void    update_player_movement(t_game *game, t_coord old_position, t_coord new_position);
-
-// init_game.c -> GESTION INICIALIZACION + CARGA ESTRUCTURA GAME -----------------------------
-
-void    load_game(t_game *game, t_map *map);
-
-int charge_textures(t_game *game);
-t_game	*initialize_struct_game(t_game *game);
-
-// init_mapping.c -> GESTION ARCHIVO MAPA, CONFIGURACION , CARGA MAPA -----------------------
+// 03_init_map.c -> GESTION ARCHIVO MAPA, CONFIGURACION , CARGA MAPA -----------------------
 
 /** 
 * @brief Lee archivo mapa, procesa y guarda la informacion y la transforma en estructura 't_map' para cargar mapa.
@@ -153,30 +138,42 @@ t_map	*load_map(char *filename);
 * @returns t_map * -> puntero a estructura mapa inicializada.
 */
 t_map	*initialize_map(char **data_map, char *filename);
-
-int		collect_map_count(t_map *map);
-
+int		collect_map_counter(t_map *map);
 void    initialize_map_render_flags(t_map *map);
-
 void    initialize_map_positions(t_map *map);
 
-// 05_free_functions.c  -> liberacion memoria, leaks y cierre ------------------------------
+// 04_init_game.c  -> GESTION INICIALIZACION + CARGA ESTRUCTURA GAME -----------------------------
 
+void    load_game(t_game *game, t_map *map);
+int charge_textures(t_game *game);
+t_game	*initialize_struct_game(t_game *game);
+
+// 05_hooks.c    -> GESTION INICIALIZACION + CARGA LOOP JUEGO ---------------------------
+
+void    start_game(t_game *game);
+void    ft_loop_hook(void *param);
+void    close_window_handler(t_game *game);
+void    key_handler(t_game *game);
+void    update_player_movement(t_game *game, t_coord old_position, t_coord new_position);
+
+// 06_render.c -------------------------------------
+
+void    render_map(t_game *game);
+void    render_tile(t_game *game, int position_y, int position_x);
+
+// 07_free_functions.c  -> liberacion memoria, leaks y cierre ------------------------------
+
+void	game_over(t_game *game);
 void	cleanup_game(t_game *game);
-void	free_images(t_game *game);
+void	clean_images(t_game *game);
 void	clean_map(t_map *map);
 void	free_matrix(void **matrix, int height);
 
-// utils.c -> UTILIDADES ------------------------------
+// 08_utils.c -> UTILIDADES IMPRESION------------------------------
 
 void    ft_struct_game_print(t_game *game);
-
 void    ft_struct_map_print(t_map *map);
-
 void	ft_strings_array_print(char **array);
-
 void	ft_matrix_bools_print(t_map *map);
-
-
 
 #endif
