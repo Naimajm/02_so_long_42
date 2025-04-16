@@ -37,9 +37,9 @@ void    ft_loop_hook(void *param)
 
     game = (t_game *)param;  // cast -> carga parametros estructura game
     // contador tiempo
-    /* while (game->frame_count < 5)
+    while (game->frame_count < 5)
         game->frame_count++;
-    game->frame_count = 0; */
+    game->frame_count = 0;
 
     key_handler(game);
     close_window_handler(game);
@@ -107,7 +107,7 @@ void    update_player_movement(t_game *game, t_coord old_position, t_coord new_p
             // CASO USO SALIDA-> PLAYER en posicion EXIT_POSITION (todos coleccionables recogidos)
             if (game->map->data[new_position.y][new_position.x] == EXIT && game->exit_success)
             {           
-                printf("-------PLAYER WIN --------------\n");          
+                printf("--------- ** PLAYER WIN **--------------\n");          
                 game_over(game); 
             }
             // actualizar flags para renderizar

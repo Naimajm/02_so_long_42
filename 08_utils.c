@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 21:20:02 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/16 20:20:02 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 00:00:27 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    ft_struct_game_print(t_game *game)
 	if (!game)
 		return ;
 	// impresion variables estructura map
-	ft_printf("STRUCT GAME----------------: \n");
+	ft_printf("** STRUCT GAME----------------: \n");
 	ft_printf("mlx: %i\n", game->mlx);
 	ft_printf("map: \n");	
 	ft_struct_map_print(game->map);
@@ -43,14 +43,15 @@ void    ft_struct_game_print(t_game *game)
 void    ft_struct_map_print(t_map *map)
 {
 	// impresion variables estructura map
-	ft_printf("STRUCT MAP----------------: \n");
+	ft_printf("** STRUCT MAP----------------: \n");
 	ft_printf("filename: %s\n", map->filename);
 	ft_printf("data: \n");
 	ft_strings_array_print(map->data);
-	ft_matrix_bools_print(map);
+	
 
 	ft_printf("width x height: (%i, %i)\n", map->width, map->height);
 	ft_printf("width_pixels x height_pixels: (%i, %i)\n", map->width_pixels, map->height_pixels);
+	ft_matrix_bools_print(map);
 	ft_printf("collect_number: %i\n", map->collect_number);
 
 	ft_printf("player_position (x, y): (%i, %i)\n", map->player_position.x, map->player_position.y);
@@ -83,7 +84,7 @@ void	ft_matrix_bools_print(t_map *map)
 
 	index_row = 0;
 	bools_list = map->render_flag;
-    ft_printf("map->render_flags (%d x %d):\n", map->height, map->width);    
+    ft_printf("map->render_flags (%d x %d):\n", map->width ,map->height);    
     while (index_row < map->height) {
         if (bools_list[index_row] == NULL) {
             printf("Row %d is NULL\n", index_row);
@@ -92,7 +93,7 @@ void	ft_matrix_bools_print(t_map *map)
         }
         index_column = 0;
         while (index_column < map->width) {
-            printf("%d ", bools_list[index_row][index_column]);
+            printf("%d", bools_list[index_row][index_column]);
             index_column++;
         }
         printf("\n");

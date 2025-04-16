@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:30:57 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/16 20:36:23 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/16 23:44:16 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@
 #define ERROR_ALLOCATING_MEM_MAP	"Error\n Allocating map memory\n"
 #define ERROR_ALLOCATING_MEM_GAME	"Error\n Allocating game memory\n"
 
-
 #define ERROR_OPEN_FILE	"Error\n opening file\n"
+#define ERROR_LOADING_MAP	"Error\n does not load map\n"
 
 #define ERROR_CHECK_MAP				"Error\n Check conditions map\n"
 #define ERROR_CHECK_NOT_ACCESS_MAP	"Error\n components not accessible\n"
@@ -104,13 +104,10 @@ typedef struct s_game
 
 // 00_so_long.c ----------------- MAIN ---------------------
 
-
-
-
 // 01_check_map.c -------------------------------------
 
 int	check_map(t_map *map);
-int	check_accessible_components_map(t_map *map);
+int	check_accessible_map(t_map *map);
 int	check_components_map(t_map *map);
 int check_rectangular_map(t_map *map);
 int	check_closed_map(t_map *map);
@@ -118,7 +115,7 @@ int	check_closed_map(t_map *map);
 // 02_utils_map.c -------------------------------------
 
 int	check_filename_type(char *filename);
-void	flood_fill(t_map *map, char **map_data, int y, int x);
+void	flood_fill_map(t_map *map, int position_x, int position_y);
 t_map	*copy_struct_map(t_map *map);
 int	components_map_counter(t_map *map, char component);
 

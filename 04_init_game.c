@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 19:32:59 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/16 20:20:18 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/16 23:12:38 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,15 @@ void    load_game(t_game *game, t_map *map)
     game->map = map;
     // CARGAR TEXTURAS
     charge_textures(game);    
-	printf("load game:		OK");
+	//printf("load game:		OK");
 }
 // ASIGNAR VARIABLES STRUCT GAME A IMG TEXTURAS (CONVERTIR TEXTURAS A IMAGENES)
 int charge_textures(t_game *game)
 {
-	mlx_texture_t	*texture_tmp;
+	//mlx_texture_t	*texture_tmp;
 	if (!game)
 		return (FAILURE);
-	texture_tmp = mlx_load_png("./textures/ground.png");
+	/* texture_tmp = mlx_load_png("./textures/ground.png");
     game->img_ground = mlx_texture_to_image(game->mlx, texture_tmp);
 	mlx_delete_texture(texture_tmp); // liberar texturas
 
@@ -60,8 +60,14 @@ int charge_textures(t_game *game)
 
 	texture_tmp = mlx_load_png("./textures/exit.png");
     game->img_exit = mlx_texture_to_image(game->mlx, texture_tmp);
-	mlx_delete_texture(texture_tmp);
+	mlx_delete_texture(texture_tmp); */
 	
+
+	game->img_ground = mlx_texture_to_image(game->mlx, mlx_load_png("./textures/ground.png"));
+	game->img_wall = mlx_texture_to_image(game->mlx, mlx_load_png("./textures/wall.png"));
+	game->img_player = mlx_texture_to_image(game->mlx, mlx_load_png("./textures/player.png"));
+	game->img_collect = mlx_texture_to_image(game->mlx, mlx_load_png("./textures/collect.png"));
+	game->img_exit = mlx_texture_to_image(game->mlx, mlx_load_png("./textures/exit.png"));
     return (SUCCESS);
 }
 
