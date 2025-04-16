@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 21:17:25 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 00:27:29 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 00:54:39 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,28 @@ int	main(int argc, char **argv)
 	map = (t_map *) malloc(sizeof(t_map));
 	//map = malloc(sizeof(t_map));
 	if (!map)
-		return (ft_printf(ERROR_ALLOCATING_MEM_MAP), FAILURE);		
+	{
+		free(map);
+		return (ft_printf(ERROR_ALLOCATING_MEM_MAP), FAILURE);	
+	}
+				
 	// CHECK EXTENSION ARCHIVO + RUTA -----------------------
 	if (check_filename_type(filename))
+	{
+		free(map);
 		return (ft_printf(ERROR_TYPE_FILENAME), FAILURE);
-		
+	}		
 	ft_printf("------------- INSERT COIN ------------\n");
 	printf("loading map ......\n");
 	map = load_map(filename);	
 	printf("LOAD MAP: 		OK\n");
 	if (!map)
+	{
+		free(map);
 		return (ft_printf(ERROR_LOADING_MAP), FAILURE);
+	}		
 	//ft_struct_map_print(map);
+
 	// CHECK MAPA (CONDICIONES SUBJECT)  ---------
 	printf("checking map .....\n");
     if (check_map(map))
@@ -62,10 +72,13 @@ int	main(int argc, char **argv)
 	printf("loading game.....\n");
 	game = (t_game *) malloc(sizeof(t_game));
 	if (!game)
+	{
+		cleanup_game(game);
 		return (ft_printf(ERROR_ALLOCATING_MEM_GAME), FAILURE);	
+	}		
 	load_game(game, map);		// inicializar struct game + cargar game
 	printf("LOAD GAME: 		OK\n");
-    ft_struct_game_print(game); // debug	
+    //ft_struct_game_print(game); // debug	
 
 	// CARGAR LOOP JUEGO -------------------------
 	// ---------------------------------------------

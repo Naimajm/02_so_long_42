@@ -102,8 +102,8 @@ void    update_player_movement(t_game *game, t_coord old_position, t_coord new_p
             game->move_count++;
             ft_printf("Number of movements: %d\n", game->move_count);
 
-            ft_printf("player_position -> (%i, %i)\n", game->map->player_position.x,game->map->player_position.y);
-            ft_printf("exit_success -> %i\n", game->exit_success);
+            //ft_printf("player_position -> (%i, %i)\n", game->map->player_position.x,game->map->player_position.y);
+            //ft_printf("exit_success -> %i\n", game->exit_success);
             // CASO USO SALIDA-> PLAYER en posicion EXIT_POSITION (todos coleccionables recogidos)
             if (game->map->data[new_position.y][new_position.x] == EXIT && game->exit_success)
             {           
