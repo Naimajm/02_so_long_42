@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 20:16:43 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 22:33:37 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 23:27:29 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@ int	check_filename_type(char *filename)
 {
 	int	len;
 
-	len = ft_strlen(filename);
-	// check extension .ber
-	if (len < 5 || ft_strncmp(filename + (len - 4), ".ber", 4) != 0)
+	len = ft_strlen(filename);	
+	if (len < 5 || ft_strncmp(filename + (len - 4), ".ber", 4) != 0) // check extension .ber
 		return (FAILURE);
 	return (SUCCESS);
 }
@@ -48,7 +47,6 @@ t_map	*copy_struct_map(t_map *map)
 {
     t_map	*new_map;
     int		row;
-    //int     column;
     
     if (!map || !map->data || map->height <= 0 || map->width <= 0)
         return (NULL);
@@ -67,8 +65,7 @@ t_map	*copy_struct_map(t_map *map)
     new_map->render_flag = NULL;
 
     // Copiar data (copia profunda)
-    new_map->data = (char **) malloc(sizeof(char *) * (new_map->height + 1));
-    
+    new_map->data = (char **) malloc(sizeof(char *) * (new_map->height + 1));    
     if (!new_map->data)
         return (clean_map(new_map), NULL);
 
@@ -81,7 +78,6 @@ t_map	*copy_struct_map(t_map *map)
         row++;
     }
     new_map->data[map->height] = NULL;
-    //ft_struct_map_print(new_map);
     return (new_map);
 }
 

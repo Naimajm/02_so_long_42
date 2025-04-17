@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 19:32:59 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 14:10:07 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 23:45:05 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,65 +20,45 @@ void    load_game(t_game *game, t_map *map)
 {
     if (!game || !map)
         return ;
+
     // INICIALIZAR VARIABLES STRUCT GAME
     initialize_struct_game(game);
 
     // INSTANCIA MLX42 -> asignacion + validacion 
     game->mlx = mlx_init(map->width_pixels, map->height_pixels, WINDOW_TITLE, true);
     if (!game->mlx)
-    {
-		//game_over(game);
-        //cleanup_game(game);
         return ;
-    }
+
     // CARGAR MAPA
     game->map = map;
+
     // CARGAR TEXTURAS
-    charge_textures(game);    
-	//printf("load game:		OK");
+    charge_textures(game);
 }
+
 // ASIGNAR VARIABLES STRUCT GAME A IMG TEXTURAS (CONVERTIR TEXTURAS A IMAGENES)
 int charge_textures(t_game *game)
 {
-	//mlx_texture_t	*texture_tmp;
 	if (!game)
 		return (FAILURE);
+
 	game->texture_ground = mlx_load_png("./textures/ground.png");
     game->img_ground = mlx_texture_to_image(game->mlx, game->texture_ground);
-	//mlx_delete_texture(texture_tmp); // liberar texturas
 
 	game->texture_wall = mlx_load_png("./textures/wall.png");
     game->img_wall = mlx_texture_to_image(game->mlx, game->texture_wall);
-	//mlx_delete_texture(texture_tmp);
 
 	game->texture_player = mlx_load_png("./textures/player.png");
     game->img_player = mlx_texture_to_image(game->mlx, game->texture_player);
-	//mlx_delete_texture(texture_tmp);
 
 	game->texture_collect = mlx_load_png("./textures/collect.png");
     game->img_collect = mlx_texture_to_image(game->mlx, game->texture_collect);
-	//mlx_delete_texture(texture_tmp);
 
 	game->texture_exit = mlx_load_png("./textures/exit.png");
     game->img_exit = mlx_texture_to_image(game->mlx, game->texture_exit);
-	//mlx_delete_texture(texture_tmp);
 
-	/* game->img_ground = mlx_texture_to_image(game->mlx, mlx_load_png("./textures/ground.png"));
-	game->img_wall = mlx_texture_to_image(game->mlx, mlx_load_png("./textures/wall.png"));
-	game->img_player = mlx_texture_to_image(game->mlx, mlx_load_png("./textures/player.png"));
-	game->img_collect = mlx_texture_to_image(game->mlx, mlx_load_png("./textures/collect.png"));
-	game->img_exit = mlx_texture_to_image(game->mlx, mlx_load_png("./textures/exit.png")); */
     return (SUCCESS);
 }
-
-/* void	ft_free_textures(mlx_texture_t texture)
-{
-	if (!texture)
-		return ;
-	free
-
-
-} */
 
 // INICIALIZAR VALORES STRUCTURA GAME 
 t_game	*initialize_struct_game(t_game *game)

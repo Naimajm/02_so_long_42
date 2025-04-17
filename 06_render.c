@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 14:06:41 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 13:25:26 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 23:58:45 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,26 @@ void    render_tile(t_game *game, int position_y, int position_x);
 
 void    render_map(t_game *game)
 {
+    int row;
+    int column;
+
     if (!game || !game->map || !game->mlx)
-        return ;
+        return ;    
 
-    int position_y;
-    int position_x;
-
-    position_y = 0;
-    while (position_y < game->map->height)
+    row = 0;
+    while (row < game->map->height)
     {
-        position_x = 0;
-        while (position_x < game->map->width)
+        column = 0;
+        while (column < game->map->width)
         {
-            if (game->map->render_flag[position_y][position_x] == true)
-            {
-                // renderizar celda
-                render_tile(game, position_y, position_x);
-                // actualizar estado 'renderizado' = false
-                game->map->render_flag[position_y][position_x] = false;
+            if (game->map->render_flag[row][column] == true) // renderizar celda -> OK
+            {                
+                render_tile(game, row, column);
+                game->map->render_flag[row][column] = false; // actualizar estado ' ya renderizado'
             }
-            position_x++;
+            column++;
         }
-        position_y++;
+        row++;
     }      
     // renderizar player en posicion
     if (game->img_player)
@@ -51,7 +49,7 @@ void    render_tile(t_game *game, int position_y, int position_x)
 
     if (!game || !game->map || !game->mlx)
         return;
-    tmp_img = NULL;
+        
     tile_type = game->map->data[position_y][position_x];
         
     if (tile_type == WALL)
@@ -61,9 +59,8 @@ void    render_tile(t_game *game, int position_y, int position_x)
     else if (tile_type == EXIT)
         tmp_img = game->img_exit;  
     else 
-        tmp_img = game->img_ground;  // RENDERIZAR SUELO -> limpia renderizados anteriores (player, enemy, collect recogido)
-    // RENDERIZAR CELDA SEGUN elemento 
-    if (tmp_img)
-        mlx_image_to_window(game->mlx, tmp_img, position_x * TILE_SIZE, position_y * TILE_SIZE);
+        tmp_img = game->img_ground;  // limpia renderizados anteriores (player, enemy, collect recogido)
+    // RENDERIZAR CELDA segun elemento img
+    mlx_image_to_window(game->mlx, tmp_img, position_x * TILE_SIZE, position_y * TILE_SIZE);
 }
 

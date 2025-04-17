@@ -19,9 +19,8 @@ DARK_YELLOW         = \033[38;5;143m
 
 # NOMBRES -----------------------------------------
 # ---------------------------------------------------
-# NOMBRE SALIDA ARCHIVO COMPILADO
+
 LIBRARY := so_long.a
-# NOMBRE SALIDA ARCHIVO COMPILADO
 NAME := so_long
 
 # DIRECTORIOS -----------------------------------------
@@ -45,7 +44,7 @@ OBJ_DIR 	:= ./obj
 # ---------------------------------------------------
 
 CC 				= cc
-CFLAGS 			= -Wall -Wextra -Werror #-fsanitize=address
+CFLAGS 			= -Wall -Wextra -Werror
 MAKE_LIBRARY 	= ar -rcs 	# COMPRESION A 1 ARCHIVO -> LIBRERIAS .a  -> $(MAKE_LIBRARY) $(NAME) $(OBJ_FILES) 
 
 # FLAGS MLX42
@@ -56,31 +55,19 @@ LFLAGS	= -L$(MLX42_DIR)/lib -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT_DIR) -lf
 # ---------------------------------------------------
 # LISTADO FUNCIONES A INCLUIR EN BIBLIOTECA
 
-# TODO : QUITAR WILDCARD Y LISTAR ARCHIVOS
-SRC_FILES := $(wildcard *.c)
+#SRC_FILES := $(wildcard *.c)
+SRC_FILES :=	00_so_long.c \
+				01_check_map.c  02_utils_map.c\
+				03_init_map.c 04_init_game.c \
+				05_hooks.c 06_render.c \
+				07_free_functions.c  08_utils.c \
 
 OBJ_FILES := $(SRC_FILES:%.c=%.o) 
-#OBJ_FILES 	= $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
-
-# Asegurá que la carpeta obj/ existe antes de compilar los .o.
-#$(OBJ_FILES): | $(OBJ_DIR)
-#$(OBJ_DIR):
-#@mkdir -p $(OBJ_DIR)
-
-# BONUS -----------------------------------------
-# ---------------------------------------------------
 
 # RECETAS -----------------------------------------
 # ---------------------------------------------------
 
 all: $(NAME)
-
-# COMPILACION ARCHIVOS OBJETOS
-#$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-#@echo "$(ORANGE)📌 Compiling objects files $< -> $@$(DEF_COLOR)"
-#@mkdir -p $(OBJ_DIR)
-#@$(CC) $(CFLAGS) $(IFLAGS) -c $< -o $@
-#@echo "$(DARK_GREEN)Objects files compiled $@$(DEF_COLOR)"
 
 # LIBRERIA ESTÁTICA 'so_long.a'
 $(LIBRARY) : $(OBJ_FILES)
@@ -94,10 +81,7 @@ $(NAME): $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE) $(LIBRARY)
 	@$(CC) ${CFLAGS} $(IFLAGS) -o $(NAME) $(LIBRARY) $(FT_PRINTF_DIR)/$(FT_PRINTF_ARCHIVE) $(LIBFT_DIR)/$(LIBFT_ARCHIVE) $(MLX42_DIR)/lib/$(MLX42_ARCHIVE) $(LFLAGS)
 	@echo "$(DARK_GREEN)$(NAME) has been created ✓$(DEF_COLOR)"
 
-#COMPILACION MANUAL SI NO FUNCIONA MAKEFILE -> cc -Wall -Wextra -Werror -I./include -I./libft -I./ft_printf \
-    -o so_long ./src/so_long.c ./ft_printf/libftprintf.a ./libft/libft.a ./MLX42/build/libmlx42.a
-
-#$(CC) ${CFLAGS} $(LIBRARY) $(LIBFT_DIR)/$(LIBFT_ARCHIVE) $(FT_PRINTF_DIR)/$(FT_PRINTF_ARCHIVE) -o $(NAME)
+#COMPILACION MANUAL SI NO FUNCIONA MAKEFILE -> cc -Wall -Wextra -Werror -I./include -I./libft -I./ft_printf -o so_long ./src/so_long.c ./ft_printf/libftprintf.a ./libft/libft.a ./MLX42/build/libmlx42.a
 
 ## DEPENDENCIAS EXTERNAS ------------------------------------------------
 
@@ -112,15 +96,6 @@ $(FT_PRINTF_ARCHIVE):
 	@echo "$(ORANGE)🖨️​ Compiling $(FT_PRINTF_ARCHIVE) library... $(DEF_COLOR)"
 	@cd ${FT_PRINTF_DIR} && make
 	@echo "$(DARK_GREEN)$(FT_PRINTF_ARCHIVE) library created ✓$(DEF_COLOR)"
-
-# LIBRERIA MLX42
-#$(MLX42_ARCHIVE):
-#@echo "$(ORANGE)📌 Compiling $(MLX42_ARCHIVE)...$(DEF_COLOR)"
-#@cd $(MLX42_DIR)/build && make
-#@echo "$(DARK_GREEN)$(MLX42_ARCHIVE) library created ✓$(DEF_COLOR)"
-
-## BONUS ---------------------------------------------------------
-#@rm -rf $(OBJ_DIR)
 
 # RECETA BORRAR ARCHIVOS
 clean:
@@ -140,11 +115,10 @@ fclean: clean
 	@cd $(FT_PRINTF_DIR) && $(MAKE) fclean
 	@echo "${DARK_GREEN}Cleaning ${NAME} is done! ${DEF_COLOR}"
 
-## DEBUG
+## DEBUG flags para sanitize o debugger 'gdb' -> -fsanitize=address
 debug: CFLAGS += -g -fsanitize=address
 debug: LFLAGS += -fsanitize=address
 debug: re
-## flags para MLX42 -> -fsanitize=address
 
 # RECOMPILACION -----------------------------------------
 # FUNCION RECONSTRUCCION -> ELIMINACION ARCHIVOS '.o' + NUEVA COMPILACION CON RECETA $(NAME)

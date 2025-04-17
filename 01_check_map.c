@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 00:00:37 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 22:32:58 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 23:26:22 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	check_map(t_map *map)
 	return (SUCCESS);	
 }
 
-// CHECK CAMINO ACCESIBLE (METODO INUNDACION -> flood fill) -----------------------
+// CHECK CAMINO ACCESIBLE (metdo propagacion -> flood fill) -----------------------
 int	check_accessible_map(t_map *map)
 {
 	int	row;
@@ -39,14 +39,12 @@ int	check_accessible_map(t_map *map)
 	t_map	*tmp_map;
 
 	tmp_map = copy_struct_map(map);
-	//ft_struct_map_print(tmp_map);
 	if (!tmp_map || !tmp_map->data)
 		return (FAILURE);
 	
 	// rellena 'X' en toda celda accesible
 	flood_fill_map(tmp_map, tmp_map->player_position.x, tmp_map->player_position.y);
 
-	//ft_struct_map_print(tmp_map);
 	row = 0;
 	while (row < tmp_map->height)
 	{
@@ -59,9 +57,8 @@ int	check_accessible_map(t_map *map)
 			column++;
 		}
 		row++;
-	}
-	//  liberar copia mapa
-	clean_map(tmp_map);	
+	}	
+	clean_map(tmp_map);	 //  liberar copia mapa
 	return (SUCCESS);
 }
 
@@ -77,6 +74,7 @@ int	check_components_map(t_map *map)
 	exit_count 			= components_map_counter(map, EXIT);
 	ground_count 		= components_map_counter(map, GROUND);
 	wall_count 			= components_map_counter(map, WALL);
+	
 	// SOLO 5 COMPONENTES (0, 1, P, E, C)
 	if ((initial_pos_count + exit_count + ground_count + wall_count + map->collect_number) < (map->width * map->height))	
 		return (FAILURE);	
@@ -100,7 +98,6 @@ int check_rectangular_map(t_map *map)
 	// factor forma -> len filas iguales
 	while (map->data[index])
 	{
-		//ft_printf("Fila %d: len=%d (esperado %d) [%s]\n", index, ft_strlen(map->data[index]), map->width, map->data[index]);
 		if (ft_strlen(map->data[0]) != ft_strlen(map->data[index]))
 			return (FAILURE);
 		index++;
@@ -115,11 +112,9 @@ int	check_closed_map(t_map *map)
 	int column;
 	
 	row = 0;
-	// ciclo filas
 	while (row < map->height)
 	{
 		column = 0;	
-		//  ciclo columnas
 		while (column < map->width)
 		{
 			// 1º fila +ultima fila -> num muros == anchura

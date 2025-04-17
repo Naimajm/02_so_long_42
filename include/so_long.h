@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:30:57 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 22:37:25 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 23:38:53 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,8 @@ int	components_map_counter(t_map *map, char component);
 * @param filename char*: nombre archivo mapa.
 * @returns t_map * -> puntero a estructura mapa configurada.
 */
-t_map	*load_map(char *filename);
+//t_map	*load_map(char *filename);
+t_map	*load_map(char *filename, t_map *map);
 
 /** 
 * @brief Función auxiliar para inicializar 't_map' mapa. Calcula dimensiones y asigna los valores de la estructura del mapa.
@@ -141,7 +142,11 @@ t_map	*load_map(char *filename);
 * @param filename char*: nombre archivo mapa.
 * @returns t_map * -> puntero a estructura mapa inicializada.
 */
-t_map	*initialize_map(char **data_map, char *filename);
+
+
+t_map	*initialize_map(t_map *map, char **data_map, char *filename);
+
+//t_map	*initialize_map(char **data_map, char *filename);
 int		collect_map_counter(t_map *map);
 void    initialize_map_render_flags(t_map *map);
 void    initialize_map_positions(t_map *map);
