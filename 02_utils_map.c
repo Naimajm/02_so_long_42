@@ -6,14 +6,17 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 20:16:43 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/16 23:43:21 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:58:10 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/so_long.h"
 
 void	flood_fill_map(t_map *map, int position_x, int position_y);
-t_map	*copy_struct_map(t_map *map);
+
+//t_map	*copy_struct_map(t_map *map);
+char	**copy_struct_map(t_map *map);
+
 int	components_map_counter(t_map *map, char component);
 
 int	check_filename_type(char *filename)
@@ -52,10 +55,14 @@ void	flood_fill_map(t_map *map, int position_x, int position_y)
     return (copy_map);
 } */
 
-t_map	*copy_struct_map(t_map *map)
+/* t_map	*copy_struct_map(t_map *map)
 {
     t_map	*new_map;
     int		row;
+    //int     column;
+    
+    if (!map || !map->data || map->height <= 0 || map->width <= 0)
+        return (NULL);
 
     new_map = (t_map *) malloc(sizeof(t_map));
     if (!new_map)
@@ -66,6 +73,8 @@ t_map	*copy_struct_map(t_map *map)
     new_map->height = map->height;
     new_map->width = map->width;
     new_map->player_position = map->player_position;
+    new_map->collect_number = map->collect_number;
+    new_map->exit_position = map->exit_position;
 
     // Copiar data (copia profunda)
     new_map->data = (char **)malloc(sizeof(char *) * new_map->height);
@@ -80,6 +89,33 @@ t_map	*copy_struct_map(t_map *map)
         row++;
     }
     return (new_map);
+} */
+
+char	**copy_struct_map(t_map *map)
+{
+	char	**copy;
+	int		y;
+	int		x;
+
+	copy = malloc(sizeof(char *) * map->height);
+	if (!copy)
+		return (NULL);
+	y = 0;
+	while (y < map->height)
+	{
+		copy[y] = malloc(sizeof(char) * (map->width + 1));
+		if (!copy[y])
+			return (NULL);
+		x = 0;
+		while (x < map->width)
+		{
+			copy[y][x] = map->data[y][x];
+			x++;
+		}
+		copy[y][x] = '\0';
+		y++;
+	}
+	return (copy);
 }
 
 int	components_map_counter(t_map *map, char component)

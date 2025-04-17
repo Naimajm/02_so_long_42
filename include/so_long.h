@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:30:57 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 13:07:55 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:52:54 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,10 @@ int	check_closed_map(t_map *map);
 
 int	check_filename_type(char *filename);
 void	flood_fill_map(t_map *map, int position_x, int position_y);
-t_map	*copy_struct_map(t_map *map);
+
+//t_map	*copy_struct_map(t_map *map);
+char	**copy_struct_map(t_map *map);
+
 int	components_map_counter(t_map *map, char component);
 
 // 03_init_map.c -> GESTION ARCHIVO MAPA, CONFIGURACION , CARGA MAPA -----------------------

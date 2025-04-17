@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 21:17:25 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 13:58:26 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 20:20:53 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,12 @@ int	main(int argc, char **argv)
 	// ---------------------------------------------
 	ft_printf("------------ ALHAMBRA 2077 -----------\n");
 	//map = (t_map *) malloc(sizeof(t_map));
-	map = malloc(sizeof(t_map));
+	/* map = malloc(sizeof(t_map));
 	if (!map)
 	{
 		//free(map);
 		return (ft_printf(ERROR_ALLOCATING_MEM_MAP), FAILURE);
-	}
-				
+	}	 */			
 	// CHECK EXTENSION ARCHIVO + RUTA -----------------------
 	if (check_filename_type(filename))
 	{
@@ -62,11 +61,11 @@ int	main(int argc, char **argv)
 
 	// CHECK MAPA (CONDICIONES SUBJECT)  ---------
 	printf("checking map .....\n");
-    /* if (check_map(map))
+    if (check_map(map))
 	{
 		clean_map(map);
 		return (ft_printf(ERROR_CHECK_MAP), FAILURE);
-	} */
+	}
 	printf("CHECK MAP: 		OK\n");
 	//ft_struct_map_print(map);  // debug impresion valores mapa
 	

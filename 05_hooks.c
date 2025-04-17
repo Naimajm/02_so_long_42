@@ -46,11 +46,11 @@ void    ft_loop_hook(void *param)
     if (!game->loop_is_running) // verificacion si el loop del juego continua abierto
         return;
 
-    //key_handler(game);
-    //close_window_handler(game);
+    key_handler(game);
+    close_window_handler(game);
 
     // renderizar mapa
-    //render_map(game);
+    render_map(game);
 }
 // CLOSE_HANDLER
 void    close_window_handler(t_game *game)
@@ -60,8 +60,8 @@ void    close_window_handler(t_game *game)
     // Tecla escape para cerrar la ventana
     if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
     {
-        mlx_close_window(game->mlx);  // ?
-        game_over(game);
+        mlx_close_window(game->mlx);  // solo cerrar ventana, NO liberar memoria aquí
+        //game_over(game);
     }
 }
 
@@ -124,11 +124,13 @@ void    update_player_movement(t_game *game, t_coord old_position, t_coord new_p
             
             //ft_printf("player_position -> (%i, %i)\n", game->map->player_position.x,game->map->player_position.y);
             //ft_printf("exit_success -> %i\n", game->exit_success);
+            
             // CASO USO SALIDA-> PLAYER en posicion EXIT_POSITION (todos coleccionables recogidos)
             if (game->map->data[new_position.y][new_position.x] == EXIT && game->exit_success)
             {           
                 printf("--------- ** PLAYER WIN **--------------\n");          
-                game_over(game); 
+                //game_over(game); 
+                mlx_close_window(game->mlx);
             }
         }
     }
