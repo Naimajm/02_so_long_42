@@ -45,7 +45,7 @@ OBJ_DIR 	:= ./obj
 # ---------------------------------------------------
 
 CC 				= cc
-CFLAGS 			= -Wall -Wextra -Werror
+CFLAGS 			= -Wall -Wextra -Werror #-fsanitize=address
 MAKE_LIBRARY 	= ar -rcs 	# COMPRESION A 1 ARCHIVO -> LIBRERIAS .a  -> $(MAKE_LIBRARY) $(NAME) $(OBJ_FILES) 
 
 # FLAGS MLX42

@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:30:57 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/16 23:44:16 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:07:55 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,13 @@ typedef struct s_map
 typedef struct s_game
 {
 	mlx_t		*mlx;			// Connection to the graphic display.
-	t_map		*map;			// Map of the game.
+	t_map		*map;
+	
+	mlx_texture_t	*texture_ground;
+	mlx_texture_t	*texture_wall;
+	mlx_texture_t	*texture_player;
+	mlx_texture_t	*texture_collect;
+	mlx_texture_t	*texture_exit;
 
 	mlx_image_t	*img_ground;
 	mlx_image_t	*img_wall;
@@ -100,6 +106,7 @@ typedef struct s_game
 	int			move_count;	
 	int			frame_count;
 	bool		exit_success;	
+	bool        loop_is_running; // Nueva bandera para controlar el estado del juego
 }	t_game;
 
 // 00_so_long.c ----------------- MAIN ---------------------

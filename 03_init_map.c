@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 21:55:16 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/16 23:50:29 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 14:28:45 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ t_map	*initialize_map(char **data_map, char *filename)
 
 	map->width			= width;
 	map->height			= height;
-	map->width_pixels	= width  * TILE_SIZE;	// total pixels map dimension
-	map->height_pixels	= height * TILE_SIZE;	// total pixels map dimension
+	map->width_pixels	= map->width  * TILE_SIZE;	// total pixels map dimension
+	map->height_pixels	= map->height * TILE_SIZE;	// total pixels map dimension
 
 	// contar coleccionables en mapa
 	map->collect_number	= collect_map_counter(map);

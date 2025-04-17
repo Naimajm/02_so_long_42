@@ -22,9 +22,9 @@ void    update_player_movement(t_game *game, t_coord old_position, t_coord new_p
 void    start_game(t_game *game)
 {
     // contador tiempo inicio
-	game->frame_count = -25;
+	/* game->frame_count = -25;
 	while (game->frame_count < 0)
-		game->frame_count++;
+		game->frame_count++; */
 
     mlx_loop_hook(game->mlx, ft_loop_hook, game);
 	mlx_loop(game->mlx);
@@ -36,23 +36,33 @@ void    ft_loop_hook(void *param)
     t_game  *game;
 
     game = (t_game *)param;  // cast -> carga parametros estructura game
-    // contador tiempo
-    while (game->frame_count < 5)
-        game->frame_count++;
-    game->frame_count = 0;
+    if (!game)
+        return;
 
-    key_handler(game);
-    close_window_handler(game);
+    // contador tiempo
+    /* while (game->frame_count < 5)
+        game->frame_count++;
+    game->frame_count = 0; */
+    if (!game->loop_is_running) // verificacion si el loop del juego continua abierto
+        return;
+
+    //key_handler(game);
+    //close_window_handler(game);
 
     // renderizar mapa
-    render_map(game);
+    //render_map(game);
 }
 // CLOSE_HANDLER
 void    close_window_handler(t_game *game)
 {
-    // tecla escape variable global libreria
+    if (!game || !game->mlx || !game->loop_is_running) 
+        return;
+    // Tecla escape para cerrar la ventana
     if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
+    {
+        mlx_close_window(game->mlx);  // ?
         game_over(game);
+    }
 }
 
 // hook procesamiento inputs teclado
@@ -60,6 +70,9 @@ void    key_handler(t_game *game)
 {
     t_coord old_position;
     t_coord new_position;
+
+    if (!game || !game->map || !game->loop_is_running)
+        return;
    
     old_position = game->map->player_position;
     new_position = old_position;
@@ -77,6 +90,9 @@ void    key_handler(t_game *game)
 
 void    update_player_movement(t_game *game, t_coord old_position, t_coord new_position)
 {
+    if (!game)
+        return ;
+
     // gestión movimientos -> no muro + (no salida y coleccionables no cogidos)
     if (game->map->data[new_position.y][new_position.x] != WALL && (game->map->data[new_position.y][new_position.x] == EXIT && game->exit_success == false) == 0)
     {
@@ -101,7 +117,11 @@ void    update_player_movement(t_game *game, t_coord old_position, t_coord new_p
             // actualizar contador movimiento
             game->move_count++;
             ft_printf("Number of movements: %d\n", game->move_count);
-
+                     
+            // actualizar flags para renderizar
+            game->map->render_flag[old_position.y][old_position.x] = true;
+            game->map->render_flag[new_position.y][new_position.x] = true;
+            
             //ft_printf("player_position -> (%i, %i)\n", game->map->player_position.x,game->map->player_position.y);
             //ft_printf("exit_success -> %i\n", game->exit_success);
             // CASO USO SALIDA-> PLAYER en posicion EXIT_POSITION (todos coleccionables recogidos)
@@ -110,9 +130,6 @@ void    update_player_movement(t_game *game, t_coord old_position, t_coord new_p
                 printf("--------- ** PLAYER WIN **--------------\n");          
                 game_over(game); 
             }
-            // actualizar flags para renderizar
-            game->map->render_flag[old_position.y][old_position.x] = true;
-            game->map->render_flag[new_position.y][new_position.x] = true;
         }
     }
 }
