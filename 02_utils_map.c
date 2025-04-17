@@ -6,17 +6,14 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 20:16:43 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 20:58:10 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 22:33:37 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/so_long.h"
 
 void	flood_fill_map(t_map *map, int position_x, int position_y);
-
-//t_map	*copy_struct_map(t_map *map);
-char	**copy_struct_map(t_map *map);
-
+t_map	*copy_struct_map(t_map *map);
 int	components_map_counter(t_map *map, char component);
 
 int	check_filename_type(char *filename)
@@ -47,15 +44,7 @@ void	flood_fill_map(t_map *map, int position_x, int position_y)
     flood_fill_map(map, position_x, position_y + 1);	
 }
 
-// COPIAR ESTRUCTURA MAP -> flood_fill() -> check_accessible_components_map()
-/* t_map	*copy_struct_map(t_map *map)
-{
-    t_map   *copy_map;  
-    copy_map = initialize_map(map->data, map->filename);
-    return (copy_map);
-} */
-
-/* t_map	*copy_struct_map(t_map *map)
+t_map	*copy_struct_map(t_map *map)
 {
     t_map	*new_map;
     int		row;
@@ -69,17 +58,20 @@ void	flood_fill_map(t_map *map, int position_x, int position_y)
         return (NULL);
 
     // Copiar datos básicos
-    new_map->filename = ft_strdup(map->filename);
+    new_map->filename = NULL;
     new_map->height = map->height;
     new_map->width = map->width;
     new_map->player_position = map->player_position;
     new_map->collect_number = map->collect_number;
     new_map->exit_position = map->exit_position;
+    new_map->render_flag = NULL;
 
     // Copiar data (copia profunda)
-    new_map->data = (char **)malloc(sizeof(char *) * new_map->height);
+    new_map->data = (char **) malloc(sizeof(char *) * (new_map->height + 1));
+    
     if (!new_map->data)
         return (clean_map(new_map), NULL);
+
     row = 0;
     while (row < new_map->height)
     {
@@ -88,34 +80,9 @@ void	flood_fill_map(t_map *map, int position_x, int position_y)
             return (clean_map(new_map), NULL);
         row++;
     }
+    new_map->data[map->height] = NULL;
+    //ft_struct_map_print(new_map);
     return (new_map);
-} */
-
-char	**copy_struct_map(t_map *map)
-{
-	char	**copy;
-	int		y;
-	int		x;
-
-	copy = malloc(sizeof(char *) * map->height);
-	if (!copy)
-		return (NULL);
-	y = 0;
-	while (y < map->height)
-	{
-		copy[y] = malloc(sizeof(char) * (map->width + 1));
-		if (!copy[y])
-			return (NULL);
-		x = 0;
-		while (x < map->width)
-		{
-			copy[y][x] = map->data[y][x];
-			x++;
-		}
-		copy[y][x] = '\0';
-		y++;
-	}
-	return (copy);
 }
 
 int	components_map_counter(t_map *map, char component)

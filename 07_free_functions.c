@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 22:00:41 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 20:25:29 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 22:35:20 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,8 +146,7 @@ void	clean_map(t_map *map)
 		free_matrix((void **)map->render_flag, map->height); // liberar filas render_flag + ptr render_flag
 		map->render_flag = NULL; // Evitar liberación doble
 	}	
-	free(map);		
-	//map = NULL; // Evitar uso posterior	
+	free(map);
 }
 
 void	free_matrix(void **matrix, int height)

@@ -6,13 +6,11 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 21:55:16 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 21:36:16 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/17 22:34:47 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/so_long.h"
-
-//static char	**filter_empty_lines(char **lines);
 
 t_map	*initialize_map(char **data_map, char *filename);
 int		collect_map_counter(t_map *map);
@@ -27,8 +25,6 @@ t_map	*load_map(char *filename)
 	char	**data_map; 	// lista lineas mapas	
 	t_map	*map;
 
-	//char 	**filtered_map; 
-
 	// LECTURA ARCHIVO MAPA ---------------------------------
 	fd = open(filename, O_RDONLY); // abrir archivo
 	// validation
@@ -39,14 +35,14 @@ t_map	*load_map(char *filename)
 	}		
 	// RESERVAR STRING DEL ARCHIVO
 	// !! calloc vs malloc -> error con malloc al no incorporar con ft_split un terminador nulo¡¡
-	raw_string_map = ft_calloc((1280 * 1024), sizeof(char)); // !! calloc vs malloc
+	raw_string_map = calloc((1280 * 1024), sizeof(char)); // !! calloc vs malloc
 	if (!raw_string_map)
 		return (close(fd), NULL);
 
 	// LECTURA + ASIGNACION STRING MAPA	
 	read(fd, raw_string_map, ((1280 * 1024) - 1)); // ASIGNACION lineas MAPA a variable
 	close(fd);
-	//ft_printf("string_map ->\n%s\n", raw_string_map);
+	
 	
 	// PROCESAMIENTO LINEAS CARACTER en CHAR**
 	data_map = ft_split(raw_string_map,'\n'); 	// lista LINEAS
@@ -54,81 +50,17 @@ t_map	*load_map(char *filename)
 	free(raw_string_map);
 	if (!data_map)
 		return(NULL);
-
-	// debug --> imprimir lineas error ultima linea -----------------------
-	int height 	= 0;
-	// conocer altura map (height)
-	while (data_map[height])
-		height++;
-	int row;
-
-	row = 0;	
-	// factor forma -> len filas iguales
-	while (row < height)
-	{
-		ft_printf("[%s]\n", data_map[row]);	
-		row++;
-	}	
-	// -----------------------------------
-
-	
+	//ft_printf("string_map ->\n%s\n", data_map);
 			
 	//ft_printf("data_map -> \n");
 	//ft_strings_array_print(data_map);
 	
 	// INICIALIZACION MAPA
 	map = initialize_map(data_map, filename); 	
-
-	
+		
 	raw_string_map = NULL;		
 	return (map);
 }
-
-/* t_map	*load_map(char *filename)
-{
-	int		fd;
-	char	*strmap;
-	char	**map_data;
-	t_map	*map;
-
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-	{
-		perror("Error\nError opening file");
-		exit (1);
-	}
-	strmap = ft_calloc(1000000, sizeof(char));
-	if (!strmap)
-		return (close(fd), NULL);
-	read(fd, strmap, 999999);
-	close(fd);
-	map_data = ft_split(strmap, '\n');
-
-
-	// debug --> imprimir lineas error ultima linea -----------------------
-	int height 	= 0;
-	// conocer altura map (height)
-	while (map_data[height])
-		height++;
-	int row;
-
-	row = 0;	
-	// factor forma -> len filas iguales
-	while (row < height)
-	{
-		ft_printf("[%s]\n", map_data[row]);	
-		row++;
-	}	
-	// -----------------------------------
-
-	free(strmap);
-	if (!map_data)
-		return (NULL);
-	map = initialize_map(map_data, filename);
-	
-	return (map);
-} */
-
 
 t_map	*initialize_map(char **data_map, char *filename)
 {
@@ -211,7 +143,7 @@ void  initialize_map_render_flags(t_map *map)
 
     position_y = 0;    
     // reserva lista bool ** flags
-    map->render_flag = (bool **) malloc(map->height * sizeof(bool *));
+    map->render_flag = (bool **) calloc(sizeof(bool *), (map->width + 1));
     // validation
     if (!map->render_flag)
         return ;
@@ -219,7 +151,7 @@ void  initialize_map_render_flags(t_map *map)
     {        
         position_x = 0;
         // reserva lista bool * flags por cada linea mapa
-        map->render_flag[position_y] = (bool *) malloc(sizeof(bool) * map->width);
+		map->render_flag[position_y] = (bool *) calloc(sizeof(bool), map->width);
         while (position_x < map->width)
         {
             map->render_flag[position_y][position_x] = true;  // por defecto -> requiere 'renderizar celda'
@@ -227,6 +159,7 @@ void  initialize_map_render_flags(t_map *map)
         }
         position_y++;
     }    
+	//map->render_flag[map->height] = NULL;
 }
 
 void    initialize_map_positions(t_map *map)
@@ -241,7 +174,6 @@ void    initialize_map_positions(t_map *map)
         position_x = 0;
         while (position_x < map->width)
         {
-            //ft_printf("map->data[%i][%i] -> %c\n", index_height, index_width, map->data[index_height][index_width]);
             // MARCAR POSICION INICIAL JUGADOR 'P'
             if (map->data[position_y][position_x] == INITIAL_POSITION)
             {
@@ -259,41 +191,3 @@ void    initialize_map_positions(t_map *map)
         position_y++;
     }    
 }
-
-// debug
-/* static char	**filter_empty_lines(char **lines)
-{
-    int		count = 0;
-    int		i = 0;
-    int		j = 0;
-    char	**filtered;
-
-    if (!lines)
-        return (NULL);
-
-    // Contar líneas no vacías
-    while (lines[count])
-    {
-        if (lines[count][0] != '\0')
-            i++;
-        count++;
-    }
-
-    filtered = malloc(sizeof(char *) * (i + 1));
-    if (!filtered)
-        return (NULL);
-
-    count = 0;
-    j = 0;
-    while (lines[count])
-    {
-        if (lines[count][0] != '\0')
-        {
-            filtered[j] = ft_strdup(lines[count]);
-            j++;
-        }
-        count++;
-    }
-    filtered[j] = NULL;
-    return (filtered);
-} */
