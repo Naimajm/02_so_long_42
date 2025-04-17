@@ -41,12 +41,12 @@ all: $(NAME)
 
 $(NAME): $(OBJ_FILES)
 	@echo "$(ORANGE)🚀​ Compiling $(NAME)... $(DEF_COLOR)"
-	$(MAKE_LIBRARY) $(NAME) $(OBJ_FILES)
+	@$(MAKE_LIBRARY) $(NAME) $(OBJ_FILES)
 	@echo "$(DARK_GREEN)$(NAME) library created ✓$(DEF_COLOR)"
 
 bonus: ${NAME} ${OBJ_FILES_BONUS}
 	@echo "$(ORANGE)🚀​ Compiling bonus... $(DEF_COLOR)"
-	$(MAKE_LIBRARY) ${NAME} ${OBJ_FILES_BONUS}
+	@$(MAKE_LIBRARY) ${NAME} ${OBJ_FILES_BONUS}
 	@echo "$(DARK_GREEN)$(NAME) library created ✓$(DEF_COLOR)"
 
 clean:

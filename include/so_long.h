@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:30:57 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/17 23:38:53 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 00:17:50 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@
 
 /* OWN LIBRARIES */
 #include "../libft/libft.h"
-#include "../ft_printf/ft_printf.h"  // ft_printf
+#include "../ft_printf/ft_printf.h"  		
 #include "../MLX42/include/MLX42/MLX42.h"   // file .h MLX42
 
 /* GLOBAL VARIABLES ----------------------------------------- */ 
 
-#define NAME		"so_long"		// executable name
+#define NAME		"so_long"		
 #define TILE_SIZE	64				// Size of the tiles in pixels.
 
 #define SUCCESS	0
@@ -37,8 +37,7 @@
 #define	WINDOW_TITLE  	"alhambra 2077"
 
 // ERRORS MESSAGES 
-#define ERROR_ARGS_1		"Error\n Enter a map file\n"
-#define ERROR_ARGS_2		"Error\n Too many arguments\n"
+#define ERROR_ARGS		"Error\n error number arguments\n"
 #define ERROR_TYPE_FILENAME	"Error\n Invalid extension file\n"
 
 #define ERROR_ALLOCATING_MEM_MAP	"Error\n Allocating map memory\n"
@@ -74,7 +73,7 @@ typedef struct s_map
 {
 	char	*filename;
 	char	**data;
-	bool	**render_flag;		// indicador para renderizar celda o no (true -> renderizar tile)
+	bool	**render_flag;		// indicador para renderizar (true -> renderizar tile)
 	int		width;
 	int		height;
 	int		width_pixels;
@@ -88,7 +87,7 @@ typedef struct s_map
 // GAME STRUCTUR
 typedef struct s_game
 {
-	mlx_t		*mlx;			// Connection to the graphic display.
+	mlx_t		*mlx;			// instancia MLX42
 	t_map		*map;
 	
 	mlx_texture_t	*texture_ground;
@@ -106,7 +105,7 @@ typedef struct s_game
 	int			move_count;	
 	int			frame_count;
 	bool		exit_success;	
-	bool        loop_is_running; // Nueva bandera para controlar el estado del juego
+	bool        loop_is_running; // bandera estado del juego
 }	t_game;
 
 // 00_so_long.c ----------------- MAIN ---------------------
@@ -133,7 +132,6 @@ int	components_map_counter(t_map *map, char component);
 * @param filename char*: nombre archivo mapa.
 * @returns t_map * -> puntero a estructura mapa configurada.
 */
-//t_map	*load_map(char *filename);
 t_map	*load_map(char *filename, t_map *map);
 
 /** 
@@ -142,11 +140,7 @@ t_map	*load_map(char *filename, t_map *map);
 * @param filename char*: nombre archivo mapa.
 * @returns t_map * -> puntero a estructura mapa inicializada.
 */
-
-
 t_map	*initialize_map(t_map *map, char **data_map, char *filename);
-
-//t_map	*initialize_map(char **data_map, char *filename);
 int		collect_map_counter(t_map *map);
 void    initialize_map_render_flags(t_map *map);
 void    initialize_map_positions(t_map *map);

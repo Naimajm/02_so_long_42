@@ -34,7 +34,7 @@ FT_PRINTF_DIR 		:= ./ft_printf
 FT_PRINTF_ARCHIVE 	:= libftprintf.a
 
 # LIBRERIA MLX42
-MLX42_DIR 		:= ./MLX42
+MLX42_DIR 		:= ./MLX42/build
 MLX42_ARCHIVE 	:= libmlx42.a
 
 SRC_DIR		:= ./src 
@@ -49,7 +49,9 @@ MAKE_LIBRARY 	= ar -rcs 	# COMPRESION A 1 ARCHIVO -> LIBRERIAS .a  -> $(MAKE_LIB
 
 # FLAGS MLX42
 IFLAGS	= -I$(MLX42_DIR)/include -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(INCLUDES_DIR)
-LFLAGS	= -L$(MLX42_DIR)/lib -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT_DIR) -lft -L$(FT_PRINTF_DIR) -lftprintf
+LFLAGS	= -L$(MLX42_DIR) -lglfw -ldl -lm -lpthread -L$(LIBFT_DIR) -L$(FT_PRINTF_DIR) 
+
+# -lmlx42 -lft -lftprintf
 
 # RECURSOS -----------------------------------------
 # ---------------------------------------------------
@@ -76,14 +78,21 @@ $(LIBRARY) : $(OBJ_FILES)
 	@echo "$(DARK_GREEN)$(LIBRARY) library created ✓$(DEF_COLOR)"
 
 # EJECUTABLE FINAL
-$(NAME): $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE) $(LIBRARY)
+$(NAME): $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE) $(LIBRARY) $(MLX42_ARCHIVE)
 	@echo "$(ORANGE)🚀​ Compiling $(NAME)... $(DEF_COLOR)"
-	@$(CC) ${CFLAGS} $(IFLAGS) -o $(NAME) $(LIBRARY) $(FT_PRINTF_DIR)/$(FT_PRINTF_ARCHIVE) $(LIBFT_DIR)/$(LIBFT_ARCHIVE) $(MLX42_DIR)/lib/$(MLX42_ARCHIVE) $(LFLAGS)
+	@$(CC) ${CFLAGS} $(IFLAGS) -o $(NAME) $(LIBRARY) $(FT_PRINTF_DIR)/$(FT_PRINTF_ARCHIVE) $(LIBFT_DIR)/$(LIBFT_ARCHIVE) $(MLX42_DIR)/$(MLX42_ARCHIVE) $(LFLAGS)
 	@echo "$(DARK_GREEN)$(NAME) has been created ✓$(DEF_COLOR)"
 
 #COMPILACION MANUAL SI NO FUNCIONA MAKEFILE -> cc -Wall -Wextra -Werror -I./include -I./libft -I./ft_printf -o so_long ./src/so_long.c ./ft_printf/libftprintf.a ./libft/libft.a ./MLX42/build/libmlx42.a
 
 ## DEPENDENCIAS EXTERNAS ------------------------------------------------
+
+#### $(MLX42_DIR)/$(MLX42_ARCHIVE) @make -C $(MLX42_DIR) -DDEBUG=ON
+
+$(MLX42_ARCHIVE):
+	@echo "$(ORANGE)📦​ Compiling $(MLX42_ARCHIVE) library... $(DEF_COLOR)"	
+	@cd ${MLX42_DIR} && make
+	@echo "$(DARK_GREEN)$(MLX42_ARCHIVE) library created ✓$(DEF_COLOR)"
 
 # FUNCION LIBRERIA LIBFT -> CREACION ARCHIVO LIBRERIA
 $(LIBFT_ARCHIVE):
