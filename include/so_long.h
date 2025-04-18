@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:30:57 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 10:17:59 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 19:46:27 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define ERROR_ARGS		"Error\n error number arguments\n"
 # define ERROR_TYPE_FILENAME	"Error\n Invalid extension file\n"
 
-# define ERROR_ALLOCATING_MEM_MAP	"Error\n Allocating map memory\n"
 # define ERROR_MEM_GAME	"Error\n Allocating game memory\n"
 
 # define ERROR_OPEN_FILE	"Error\n opening file\n"
@@ -104,7 +103,7 @@ void	flood_fill_map(t_map *map, int position_x, int position_y);
 t_map	*copy_struct_map(t_map *map);
 int		components_map_counter(t_map *map, char component);
 
-t_map	*load_map(char *filename, t_map *map);
+t_map	*load_map(char *filename);
 t_map	*initialize_map(t_map *map, char **data_map, char *filename);
 int		collect_map_counter(t_map *map);
 void	initialize_map_render_flags(t_map *map);

@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 21:55:16 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 11:19:06 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 19:31:28 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,16 @@ int		collect_map_counter(t_map *map);
 void	initialize_map_render_flags(t_map *map);
 void	initialize_map_positions(t_map *map);
 
-t_map	*load_map(char *filename, t_map *map)
+t_map	*load_map(char *filename)
 {
 	int		fd;
 	char	*raw_string_map;
 	char	**data_map;
+	t_map	*map;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-	{
-		ft_printf(ERROR_OPEN_FILE);
-		exit (FAILURE);
-	}
+		return (ft_printf(ERROR_OPEN_FILE), NULL);
 	raw_string_map = calloc((1280 * 1024), sizeof(char));
 	if (!raw_string_map)
 		return (close(fd), NULL);
@@ -36,7 +34,10 @@ t_map	*load_map(char *filename, t_map *map)
 	close(fd);
 	data_map = ft_split(raw_string_map, '\n');
 	if (!data_map)
-		return (NULL);
+		return (free(data_map), NULL);
+	map = (t_map *) malloc(sizeof(t_map));
+	if (!map)
+		return (free(raw_string_map), NULL);
 	map = initialize_map(map, data_map, filename);
 	free(raw_string_map);
 	raw_string_map = NULL;

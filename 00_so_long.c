@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 21:17:25 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 10:23:08 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 19:37:32 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,14 @@ int	main(int argc, char **argv)
 	t_map	*map;
 	t_game	*game;
 
+	map = NULL;
+	game = NULL;
 	if (argc != 2)
 		return (ft_printf(ERROR_ARGS), FAILURE);
 	filename = argv[1];
-	map = (t_map *) malloc(sizeof(t_map));
-	if (!map)
-		return (ft_printf(ERROR_ALLOCATING_MEM_MAP), FAILURE);
 	if (check_filename_type(filename))
 		return (ft_printf(ERROR_TYPE_FILENAME), FAILURE);
-	map = load_map(filename, map);
+	map = load_map(filename);
 	if (!map)
 		return (clean_map(map), ft_printf(ERROR_LOADING_MAP), FAILURE);
 	if (check_map(map))
