@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 21:17:25 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 19:59:42 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 21:56:49 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char **argv)
 		return (clean_map(map), ft_printf(ERROR_CHECK_MAP), FAILURE);
 	game = load_game(map);
 	if (!game)
-		return (cleanup_game(game), ft_printf(ERROR_MEM_GAME), FAILURE);	
+		return (cleanup_game(game), ft_printf(ERROR_MEM_GAME), FAILURE);
 	start_game(game);
 	game_over(game);
 	return (SUCCESS);

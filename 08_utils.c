@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 21:20:02 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 19:10:01 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 22:06:22 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ void	ft_struct_game_print(t_game *game)
 
 void	ft_struct_map_print(t_map *map)
 {
+	if (!map)
+		return ;
 	ft_printf("* STRUCT MAP ------------- *: \n");
 	ft_printf("filename: %s\n", map->filename);
 	ft_printf("data: \n");

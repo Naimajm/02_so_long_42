@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:30:57 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 00:17:50 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 21:09:10 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void    initialize_map_positions(t_map *map);
 // 04_init_game.c  -> GESTION INICIALIZACION + CARGA ESTRUCTURA GAME -----------------------------
 
 void    load_game(t_game *game, t_map *map);
-int charge_textures(t_game *game);
+int load_textures(t_game *game);
 t_game	*initialize_struct_game(t_game *game);
 
 // 05_hooks.c    -> GESTION INICIALIZACION + CARGA LOOP JUEGO ---------------------------

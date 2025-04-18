@@ -6,17 +6,17 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 19:32:59 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 20:00:31 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 21:13:21 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/so_long.h"
 
-int		charge_textures(t_game *game);
+int		load_textures(t_game *game);
 t_game	*initialize_struct_game(t_game *game);
 
 t_game	*load_game(t_map *map)
-{	
+{
 	t_game	*game;
 
 	if (!map)
@@ -30,11 +30,11 @@ t_game	*load_game(t_map *map)
 	if (!game->mlx)
 		return (cleanup_game(game), NULL);
 	game->map = map;
-	charge_textures(game);
+	load_textures(game);
 	return (game);
 }
 
-int	charge_textures(t_game *game)
+int	load_textures(t_game *game)
 {
 	if (!game)
 		return (FAILURE);
@@ -48,6 +48,9 @@ int	charge_textures(t_game *game)
 	game->img_collect = mlx_texture_to_image(game->mlx, game->texture_collect);
 	game->texture_exit = mlx_load_png("./textures/exit.png");
 	game->img_exit = mlx_texture_to_image(game->mlx, game->texture_exit);
+	if (!game->img_ground || !game->img_wall || !game->img_player
+		|| !game->img_collect || !game->img_exit)
+		return (clean_images(game), FAILURE);
 	return (SUCCESS);
 }
 

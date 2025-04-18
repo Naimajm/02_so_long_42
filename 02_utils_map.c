@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 20:16:43 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 11:05:36 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 20:44:17 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,11 @@ t_map	*copy_struct_map(t_map *map)
 	t_map	*tmp;
 	int		row;
 
+	if (!map)
+		return (NULL);
 	tmp = (t_map *) malloc(sizeof(t_map));
 	if (!tmp)
 		return (NULL);
-	tmp->filename = NULL;
 	tmp->height = map->height;
 	tmp->width = map->width;
 	tmp->player_position = map->player_position;

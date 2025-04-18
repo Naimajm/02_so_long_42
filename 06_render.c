@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 14:06:41 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 19:00:38 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 21:58:29 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ void	render_tile(t_game *game, int position_y, int position_x)
 	char		tile_type;
 	mlx_image_t	*tmp_img;
 
-	if (!game || !game->map || !game->mlx)
-		return ;
 	tile_type = game->map->data[position_y][position_x];
 	if (tile_type == WALL)
 		tmp_img = game->img_wall;

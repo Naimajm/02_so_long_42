@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 21:55:16 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 19:31:28 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 21:02:52 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,22 @@ t_map	*load_map(char *filename)
 	char	**data_map;
 	t_map	*map;
 
+	if (!filename)
+		return (NULL);
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 		return (ft_printf(ERROR_OPEN_FILE), NULL);
-	raw_string_map = calloc((1280 * 1024), sizeof(char));
+	raw_string_map = ft_calloc((1280 * 1024), sizeof(char));
 	if (!raw_string_map)
 		return (close(fd), NULL);
 	read(fd, raw_string_map, ((1280 * 1024) - 1));
 	close(fd);
 	data_map = ft_split(raw_string_map, '\n');
 	if (!data_map)
-		return (free(data_map), NULL);
+		return (NULL);
 	map = (t_map *) malloc(sizeof(t_map));
 	if (!map)
-		return (free(raw_string_map), NULL);
+		return (free_matrix((void **) data_map, -1), NULL);
 	map = initialize_map(map, data_map, filename);
 	free(raw_string_map);
 	raw_string_map = NULL;
@@ -49,13 +51,14 @@ t_map	*initialize_map(t_map *map, char **data_map, char *filename)
 	int	height;
 	int	width;
 
-	height = 0;
-	width = 0;
-	if (!data_map || !filename)
+	if (!map || !data_map || !filename)
 		return (NULL);
+	height = 0;
 	while (data_map[height])
 		height++;
-	width = ft_strlen(data_map[0]);
+	width = 0;
+	if (data_map[0])
+		width = ft_strlen(data_map[0]);
 	map->filename = filename;
 	map->data = data_map;
 	map->width = width;
@@ -74,6 +77,8 @@ int	collect_map_counter(t_map *map)
 	int	row;
 	int	column;
 
+	if (!map)
+		return (FAILURE);
 	collect_number = 0;
 	row = 0;
 	while (row < map->height)
@@ -95,14 +100,18 @@ void	initialize_map_render_flags(t_map *map)
 	int	row;
 	int	column;
 
-	map->render_flag = (bool **) calloc(sizeof(bool *), (map->width + 1));
+	if (!map)
+		return ;
+	map->render_flag = (bool **) ft_calloc(map->height + 1, sizeof(bool *));
 	if (!map->render_flag)
 		return ;
 	row = 0;
 	while (row < map->height)
 	{
+		map->render_flag[row] = (bool *) ft_calloc(map->width, sizeof(bool));
+		if (!map->render_flag[row])
+			return ;
 		column = 0;
-		map->render_flag[row] = (bool *) calloc(sizeof(bool), map->width);
 		while (column < map->width)
 		{
 			map->render_flag[row][column] = true;
@@ -117,6 +126,8 @@ void	initialize_map_positions(t_map *map)
 	int	row;
 	int	column;
 
+	if (!map)
+		return ;
 	row = 0;
 	while (row < map->height)
 	{

@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 22:00:41 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 19:03:51 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 22:02:58 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ void	game_over(t_game *game)
 		return ;
 	game->loop_is_running = false;
 	game->frame_count = -100;
-	while (game->frame_count < 0)
-		game->frame_count++;
 	if (game->mlx)
 	{
 		mlx_close_window(game->mlx);
@@ -71,16 +69,8 @@ void	clean_map(t_map *map)
 {
 	if (!map)
 		return ;
-	if (map->data)
-	{
-		free_matrix((void **) map->data, map->height);
-		map->data = NULL;
-	}
-	if (map->render_flag)
-	{
-		free_matrix((void **) map->render_flag, map->height);
-		map->render_flag = NULL;
-	}
+	free_matrix((void **) map->data, map->height);
+	free_matrix((void **) map->render_flag, map->height);
 	free(map);
 }
 
