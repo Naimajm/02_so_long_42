@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 19:32:59 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 19:57:15 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 20:00:31 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_game	*load_game(t_map *map)
 	t_game	*game;
 
 	if (!map)
-		return ;
+		return (NULL);
 	game = (t_game *) malloc(sizeof(t_game));
 	if (!game)
 		return (ft_printf(ERROR_MEM_GAME), NULL);
