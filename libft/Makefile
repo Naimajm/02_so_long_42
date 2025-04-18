@@ -42,22 +42,20 @@ all: $(NAME)
 $(NAME): $(OBJ_FILES)
 	@echo "$(ORANGE)🚀​ Compiling $(NAME)... $(DEF_COLOR)"
 	@$(MAKE_LIBRARY) $(NAME) $(OBJ_FILES)
-	@echo "$(DARK_GREEN)$(NAME) library created ✓$(DEF_COLOR)"
+	@echo "$(DARK_GREEN)📚 $(NAME) library created			OK$(DEF_COLOR)"
 
 bonus: ${NAME} ${OBJ_FILES_BONUS}
 	@echo "$(ORANGE)🚀​ Compiling bonus... $(DEF_COLOR)"
 	@$(MAKE_LIBRARY) ${NAME} ${OBJ_FILES_BONUS}
-	@echo "$(DARK_GREEN)$(NAME) library created ✓$(DEF_COLOR)"
+	@echo "$(DARK_GREEN)📚 $(NAME) library created			OK$(DEF_COLOR)"
 
 clean:
-	@echo "${ORANGE}🗑️​ Removing object files...${NAME}...${DEF_COLOR}"
 	@rm -f $(OBJ_FILES) $(OBJ_FILES_BONUS)
-	@echo "${DARK_GREEN}Cleaning objects ${NAME} is done! ${DEF_COLOR}"
+	@echo "${MID_GRAY}Cleaning objects ${NAME}			OK${DEF_COLOR}"
 
-fclean: clean 
-	@echo "${ORANGE}🗑️ Removing files...${NAME}... ${DEF_COLOR}"
+fclean: clean
 	@rm -f $(NAME)
-	@echo "${DARK_GREEN}Cleaning ${NAME} is done! ${DEF_COLOR}"
+	@echo "${MID_GRAY}Cleaning ${NAME}				OK${DEF_COLOR}"
 
 re: fclean all
 	@echo "${DARK_GREEN}🔁 Cleaning ${NAME} is done and $(NAME) has been created✓! ${DEF_COLOR}"
