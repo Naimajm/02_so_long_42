@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 00:00:37 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 10:45:36 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 20:36:33 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	check_closed_map(t_map *map);
 
 int	check_map(t_map *map)
 {
+	if (!map)
+		return (FAILURE);
 	if (check_rectangular_map(map))
 		return (ft_printf(ERROR_CHECK_RECTANGULAR_MAP), FAILURE);
 	if (check_closed_map(map))
@@ -32,27 +34,28 @@ int	check_map(t_map *map)
 
 int	check_accessible_map(t_map *map)
 {
-	int		row;
-	int		column;
+	int		r;
+	int		col;
 	t_map	*tmp;
 
+	if (!map)
+		return (FAILURE);
 	tmp = copy_struct_map(map);
 	if (!tmp || !tmp->data)
 		return (FAILURE);
 	flood_fill_map(tmp, tmp->player_position.x, tmp->player_position.y);
-	row = 0;
-	while (row < tmp->height)
+	r = 0;
+	while (r < tmp->height)
 	{
-		column = 0;
-		while (column < tmp->width)
+		col = 0;
+		while (col < tmp->width)
 		{
-			if (tmp->data[row][column] == INITIAL_POSITION
-				|| tmp->data[row][column] == EXIT
-				|| tmp->data[row][column] == COLLECT)
+			if (tmp->data[r][col] == INITIAL_POSITION
+				|| tmp->data[r][col] == EXIT || tmp->data[r][col] == COLLECT)
 				return (clean_map(tmp), FAILURE);
-			column++;
+			col++;
 		}
-		row++;
+		r++;
 	}
 	clean_map(tmp);
 	return (SUCCESS);
@@ -65,6 +68,8 @@ int	check_components_map(t_map *map)
 	int	ground_count;
 	int	wall_count;
 
+	if (!map)
+		return (FAILURE);
 	initial_pos_count = components_map_counter(map, INITIAL_POSITION);
 	exit_count = components_map_counter(map, EXIT);
 	ground_count = components_map_counter(map, GROUND);
@@ -72,9 +77,7 @@ int	check_components_map(t_map *map)
 	if ((initial_pos_count + exit_count + ground_count + wall_count \
 		+ map->collect_number) < (map->width * map->height))
 		return (FAILURE);
-	if (initial_pos_count > 1 || exit_count > 1)
-		return (FAILURE);
-	if (map->collect_number == 0 || initial_pos_count == 0 || exit_count == 0)
+	if (map->collect_number == 0 || initial_pos_count != 1 || exit_count != 1)
 		return (FAILURE);
 	return (SUCCESS);
 }
@@ -82,11 +85,15 @@ int	check_components_map(t_map *map)
 int	check_rectangular_map(t_map *map)
 {
 	int		index;
+	size_t	len;
 
+	if (!map)
+		return (FAILURE);
 	index = 0;
+	len = ft_strlen(map->data[0]);
 	while (map->data[index])
 	{
-		if (ft_strlen(map->data[0]) != ft_strlen(map->data[index]))
+		if (len != ft_strlen(map->data[index]))
 			return (FAILURE);
 		index++;
 	}
@@ -98,20 +105,22 @@ int	check_closed_map(t_map *map)
 	int	row;
 	int	column;
 
+	if (!map)
+		return (FAILURE);
+	column = 0;
+	while (column < map->width)
+	{
+		if (map->data[0][column] != WALL
+			|| map->data[map->height - 1][column] != WALL)
+			return (FAILURE);
+		column++;
+	}
 	row = 0;
 	while (row < map->height)
 	{
-		column = 0;
-		while (column < map->width)
-		{
-			if (map->data[0][column] != WALL \
-				|| map->data[map->height - 1][column] != WALL)
-				return (FAILURE);
-			if (map->data[row][0] != WALL \
-				|| map->data[row][map->width - 1] != WALL)
-				return (FAILURE);
-			column++;
-		}
+		if (map->data[row][0] != WALL \
+			|| map->data[row][map->width - 1] != WALL)
+			return (FAILURE);
 		row++;
 	}
 	return (SUCCESS);
