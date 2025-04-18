@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 22:30:57 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 19:46:27 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 19:51:24 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int		collect_map_counter(t_map *map);
 void	initialize_map_render_flags(t_map *map);
 void	initialize_map_positions(t_map *map);
 
-void	load_game(t_game *game, t_map *map);
+t_game	*load_game(t_map *map);
 int		charge_textures(t_game *game);
 t_game	*initialize_struct_game(t_game *game);
 

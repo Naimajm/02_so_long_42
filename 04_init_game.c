@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 19:32:59 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 18:46:25 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/18 19:57:15 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,23 @@
 int		charge_textures(t_game *game);
 t_game	*initialize_struct_game(t_game *game);
 
-void	load_game(t_game *game, t_map *map)
-{
-	if (!game || !map)
+t_game	*load_game(t_map *map)
+{	
+	t_game	*game;
+
+	if (!map)
 		return ;
+	game = (t_game *) malloc(sizeof(t_game));
+	if (!game)
+		return (ft_printf(ERROR_MEM_GAME), NULL);
 	initialize_struct_game(game);
 	game->mlx = mlx_init(map->width_pixels,
 			map->height_pixels, WINDOW_TITLE, true);
 	if (!game->mlx)
-		return ;
+		return (cleanup_game(game), NULL);
 	game->map = map;
 	charge_textures(game);
+	return (game);
 }
 
 int	charge_textures(t_game *game)
