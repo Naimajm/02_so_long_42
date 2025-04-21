@@ -23,7 +23,7 @@ LIBFT_ARCHIVE 	:= libft.a
 FT_PRINTF_DIR 		:= ./ft_printf
 FT_PRINTF_ARCHIVE 	:= libftprintf.a
 
-MLX42_DIR 		:= ./MLX42/build
+MLX42_DIR 		:= ./MLX42/lib
 MLX42_ARCHIVE 	:= libmlx42.a
 
 SRC_DIR		:= ./src 
@@ -34,7 +34,7 @@ CFLAGS 			= -Wall -Wextra -Werror
 MAKE_LIBRARY 	= ar -rcs 
 
 IFLAGS	= -I$(MLX42_DIR)/include -I$(LIBFT_DIR) -I$(FT_PRINTF_DIR) -I$(INCLUDES_DIR)
-LFLAGS	= -L$(MLX42_DIR) -lglfw -ldl -lm -lpthread -L$(LIBFT_DIR) -L$(FT_PRINTF_DIR) 
+LFLAGS	= -L$(MLX42_DIR) -lmlx42 -lglfw -ldl -lm -lpthread -L$(LIBFT_DIR) -L$(FT_PRINTF_DIR) 
 
 SRC_FILES :=	00_so_long.c \
 				01_check_map.c  02_utils_map.c\
@@ -51,14 +51,14 @@ $(LIBRARY) : $(OBJ_FILES)
 	@$(MAKE_LIBRARY) $(LIBRARY) $^
 	@echo "$(DARK_GREEN)📦 $(LIBRARY) library created			OK$(DEF_COLOR)"
 
-$(NAME): $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE) $(LIBRARY) $(MLX42_ARCHIVE)
+$(NAME): $(LIBFT_ARCHIVE) $(FT_PRINTF_ARCHIVE) $(LIBRARY)
 	@echo "$(ORANGE)🚀​ Compiling $(NAME)... $(DEF_COLOR)"
 	@$(CC) ${CFLAGS} $(IFLAGS) -o $(NAME) $(LIBRARY) $(FT_PRINTF_DIR)/$(FT_PRINTF_ARCHIVE) $(LIBFT_DIR)/$(LIBFT_ARCHIVE) $(MLX42_DIR)/$(MLX42_ARCHIVE) $(LFLAGS)
 	@echo "$(DARK_GREEN)$(NAME) has been created			OK$(DEF_COLOR)"
 
-$(MLX42_ARCHIVE):
-	@cd ${MLX42_DIR} && $(MAKE) -s
-	@echo "$(DARK_GREEN)📦 $(MLX42_ARCHIVE) library created			OK$(DEF_COLOR)"
+#$(MLX42_ARCHIVE):
+#	@cd ${MLX42_DIR} && $(MAKE) -s
+#	@echo "$(DARK_GREEN)📦 $(MLX42_ARCHIVE) library created			OK$(DEF_COLOR)"
 
 $(LIBFT_ARCHIVE):
 	@cd ${LIBFT_DIR} && $(MAKE) -s
