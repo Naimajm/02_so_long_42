@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   MLX42.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/28 02:29:06 by W2Wizard          #+#    #+#             */
-/*   Updated: 2025/04/10 22:33:55 by juagomez         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   MLX42.h                                            :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: W2Wizard <main@w2wizard.dev>                 +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2021/12/28 02:29:06 by W2Wizard      #+#    #+#                 */
+/*   Updated: 2023/03/30 16:23:19 by ntamayo-      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
  *
- * MLX42 is a cross-platform low level and simple graphics
+ * MLX42 is a cross-platform low level and simple cross-platform graphics
  * library written in C and uses OpenGL and GLFW for it's underlying windowing
  * and rendering system.
  * 
  * It's a much more up-to-date alternative to the miniLibX which has been
  * extensively proven to be fragile, unmaintained, deprecated and just
- * plain painfully bad to work with. Also its code quality is dubious.
+ * plain painfully bad to work with. Also it's code quality is dubious.
  * 
  * Some structs contain potential void* which are to be ignored as they 
  * simply represent points of abstraction to the hidden internal header.
