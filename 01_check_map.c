@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 00:00:37 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 20:36:33 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/22 22:24:35 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	check_components_map(t_map *map)
 	exit_count = components_map_counter(map, EXIT);
 	ground_count = components_map_counter(map, GROUND);
 	wall_count = components_map_counter(map, WALL);
-	if ((initial_pos_count + exit_count + ground_count + wall_count \
-		+ map->collect_number) < (map->width * map->height))
+	if ((initial_pos_count + exit_count + ground_count + wall_count
+			+ map->collect_number) < (map->width * map->height))
 		return (FAILURE);
 	if (map->collect_number == 0 || initial_pos_count != 1 || exit_count != 1)
 		return (FAILURE);
@@ -118,7 +118,7 @@ int	check_closed_map(t_map *map)
 	row = 0;
 	while (row < map->height)
 	{
-		if (map->data[row][0] != WALL \
+		if (map->data[row][0] != WALL
 			|| map->data[row][map->width - 1] != WALL)
 			return (FAILURE);
 		row++;

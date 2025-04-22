@@ -6,7 +6,7 @@
 /*   By: juagomez <juagomez@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 23:51:29 by juagomez          #+#    #+#             */
-/*   Updated: 2025/04/18 21:55:33 by juagomez         ###   ########.fr       */
+/*   Updated: 2025/04/22 21:18:00 by juagomez         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_loop_hook(void *param)
 	if (!game)
 		return ;
 	game->frame_count++;
-	if (game->frame_count < 50)
+	if (game->frame_count < 6)
 		return ;
 	game->frame_count = 0;
 	if (!game->loop_is_running)
